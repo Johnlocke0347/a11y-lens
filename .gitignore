@@ -21,3 +21,4 @@ tests/_crash_worker.py
 # Python packaging
 build/
 dist/
+a11y-lens-demo/

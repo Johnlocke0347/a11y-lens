@@ -2,7 +2,7 @@
 
 ## Prep (once, before recording)
 ```bash
-hermes plugins install OWNER/a11y-lens --enable && hermes a11y install && hermes a11y doctor
+hermes plugins install Johnlocke0347/a11y-lens --enable && hermes a11y install && hermes a11y doctor
 hermes a11y demo --reset          # pristine broken site in ./a11y-lens-demo
 ```
 Open `./a11y-lens-demo/index.html` in a browser first so viewers see a normal-looking coffee shop. Keep a terminal and a browser (for the HTML reports) side by side.

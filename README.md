@@ -73,7 +73,7 @@ Single page per scan (no crawling), no login flows by design. Chromium's DNS pin
 
 ```bash
 pip install playwright pytest && playwright install chromium
-pytest -q            # 42 tests: policy, compare engine, store, reports, REAL-browser scans, failure & safety cases
+pytest -q            # 49 tests: policy, compare engine, store, reports, REAL-browser scans, failure & safety cases
 hermes plugins validate .
 ```
 `A11Y_LENS_TEST_BROWSER=/path/to/chrome` points the integration tests at a specific browser. Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).

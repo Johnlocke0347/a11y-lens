@@ -1,4 +1,4 @@
-﻿"""Scan-target safety policy.
+"""Scan-target safety policy.
 
 Default posture: **loopback only**.  A model can never widen it from a tool call -- extra origins are
 authorised exclusively by the human through ``hermes a11y allow <origin>`` (stored in the plugin's

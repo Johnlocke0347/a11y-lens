@@ -1,4 +1,4 @@
-﻿"""Persistent scan history (SQLite) + on-disk report files.
+"""Persistent scan history (SQLite) + on-disk report files.
 
 Inside Hermes the database lives in ``<HERMES_HOME>/plugin-data/a11y-lens/`` (via the public
 ``plugins.plugin_storage`` helpers) so it survives plugin updates and follows the active profile.

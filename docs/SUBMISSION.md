@@ -1,6 +1,6 @@
 # Submission checklist
 
-1. Create the public repo (`OWNER/a11y-lens`), push this directory as the repo root, replace `OWNER` in `plugin.yaml` (`homepage`) and `README.md`.
+1. Create the public repo (`Johnlocke0347/a11y-lens`), push this directory as the repo root, replace `Johnlocke0347` in `plugin.yaml` (`homepage`) and `README.md`.
 2. `pytest -q` and `hermes plugins validate .` must be green on your machine.
 3. Record the demo (see `DEMO.md`), post it on X tagging @NousResearch with the hackathon tag.
 4. Pin the commit: `git rev-parse HEAD` → `sha` below.
@@ -9,7 +9,7 @@
 ## `plugin-catalog/a11y-lens.yaml`
 ```yaml
 name: a11y-lens
-repo: https://github.com/OWNER/a11y-lens
+repo: https://github.com/Johnlocke0347/a11y-lens
 sha: <40-hex commit sha>
 description: >-
   Autonomous website accessibility testing and repair verification. Scans pages in a real headless
@@ -20,11 +20,11 @@ description: >-
   downloads Playwright's Chromium from Playwright's official CDN on explicit user command; serves a
   user-supplied local .html folder on 127.0.0.1 for the duration of a scan; stores scan history and
   reports locally via plugin storage; never submits forms, collects credentials or sends data off-machine.
-maintainer: OWNER
+maintainer: Johnlocke0347
 tier: community
 category: web
 requires_hermes: ">=0.23.0"
-docs_url: https://github.com/OWNER/a11y-lens#readme
+docs_url: https://github.com/Johnlocke0347/a11y-lens#readme
 version: "0.1.0"
 platforms: []
 capabilities:
