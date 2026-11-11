@@ -173,6 +173,13 @@ def format_scan(res: dict[str, Any]) -> str:
                  f"{s['needs_human_review_rules']} rules need human review")
     if res["status"] == "incomplete":
         lines.append("⚠ INCOMPLETE: " + "; ".join(res.get("incomplete_reasons", [])))
+    if res.get("truncated") or res.get("omitted_nodes"):
+        trunc = res.get("evidence_truncation", {})
+        by_rule = trunc.get("by_rule", [])
+        detail = ""
+        if by_rule:
+            detail = " Affected: " + ", ".join(f"{r.get('id')}: {r.get('omitted')} omitted" for r in by_rule) + "."
+        lines.append(f"⚠ EVIDENCE TRUNCATED: {trunc.get('omitted_nodes', res.get('omitted_nodes', 0))} finding instances omitted from stored evidence (per-rule cap 50); total axe counts remain accurate ({s['elements_affected']} audited, only subset retained).{detail}")
     for f in res["findings"]:
         lines.append(f"  [{f['impact']}] {f['rule_id']} ×{f['elements_affected']} — {f['help']}")
     lines += [f"HTML report: {res['report_html']}", "Automated checks only; not a conformance claim."]
@@ -183,11 +190,29 @@ def format_compare(res: dict[str, Any]) -> str:
     if not res.get("ok"):
         return f"✗ {res['error']['message']}"
     s = res["summary"]
-    lines = [f"{res['before_id']} → {res['after_id']} · {res['verdict'].upper()}",
-             f"resolved {s['resolved']} · remaining {s['remaining']} · newly introduced {s['introduced']} "
-             f"(elements {s['before_instances']} → {s['after_instances']})"]
+    # Distinguish total findings (before_total/after_total) from retained evidence (before_instances/after_instances)
+    total_before = s.get("before_total", s.get("before_instances"))
+    total_after = s.get("after_total", s.get("after_instances"))
+    retained_before = s.get("before_retained", s.get("before_instances"))
+    retained_after = s.get("after_retained", s.get("after_instances"))
+    # Old consumers: before_instances/after_instances historically meant retained evidence counts – preserve that
+    approx = s.get("approximate") or res.get("approximate")
+    unverified = s.get("unverified", 0)
+    if approx and retained_before is not None and retained_after is not None:
+        lines = [f"{res['before_id']} → {res['after_id']} · {res['verdict'].upper()} (APPROXIMATE - evidence truncated)",
+                 f"actual totals {total_before} → {total_after} (retained evidence {retained_before} → {retained_after} == before_instances/after_instances); resolved {s['resolved']} · remaining {s['remaining']} · newly introduced {s['introduced']} (definitive) · unverified {unverified}"]
+        lines.append(f"  Note: before_instances/after_instances = retained evidence counts ({retained_before} → {retained_after}); before_total/after_total = actual axe totals ({total_before} → {total_after}). Omitted: {s.get('before_omitted',0)} → {s.get('after_omitted',0)}.")
+    else:
+        lines = [f"{res['before_id']} → {res['after_id']} · {res['verdict'].upper()}",
+                 f"resolved {s['resolved']} · remaining {s['remaining']} · newly introduced {s['introduced']} "
+                 f"(retained {retained_before} → {retained_after} == before_instances/after_instances; totals {total_before} → {total_after})"]
     for i in res["introduced"]:
         lines.append(f"  ✗ NEW [{i['impact']}] {i['rule_id']} {i['selector']}")
+    if res.get("unverified"):
+        for u in res["unverified"][:5]:
+            lines.append(f"  ? UNVERIFIED [{u['impact']}] {u['rule_id']} {u['selector']} – {u.get('unverified_reason','')}")
+        if len(res["unverified"]) > 5:
+            lines.append(f"  … {len(res['unverified'])-5} more unverified in JSON report")
     for w in res["warnings"]:
         lines.append(f"  ⚠ {w}")
     lines += [f"HTML report: {res['report_html']}", res["caveat"]]

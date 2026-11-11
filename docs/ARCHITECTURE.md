@@ -33,7 +33,7 @@ Hermes ── a11y_scan / a11y_report / a11y_compare (tools.py, JSON in/out, nev
 1. `validate_target` → resolve hostnames once, reject non-loopback unless authorised, reject non-public IPs, pin IPs.
 2. Spawn worker (hard limit = page timeout + 25 s). Worker: new context (fixed locale/timezone/colour scheme/reduced motion, service workers blocked, downloads off) → `goto` → refuse HTTP ≥ 400 → verify final host is pinned → wait for load/idle (bounded) → inject axe into every frame → `axe.run` with tags `wcag2a, wcag2aa, wcag21a, wcag21aa, wcag22aa, best-practice`.
 3. Evidence: per violating node, computed style/box/attributes, plus an element screenshot (≤ 24, password inputs skipped).
-4. Parent builds a record. Status is `complete` only if the worker said so **and** axe results exist; any skipped frame, truncated node list or anything unreachable makes it `incomplete`; any error makes it `failed`. All three are stored; `a11y_compare` only accepts `complete`.
+4. Parent builds a record. Status is `complete` only if the worker said so **and** axe results exist; any skipped frame or anything unreachable makes it `incomplete`; evidence truncation beyond the per-rule cap (50) does **not** make a scan incomplete — counts remain accurate and stored evidence is a subset, surfaced as notes/warnings. Any error makes it `failed`. All three are stored; `a11y_compare` only accepts `complete` (including truncated-complete, flagged as approximate).
 
 ## Compare algorithm
 

@@ -13,7 +13,8 @@ Safety model
   and pinned in Chromium via ``--host-resolver-rules`` -- DNS rebinding cannot swap the IP later.
   Every other host resolves to NOTFOUND.
 * A route handler additionally blocks any request whose host is not in the pinned set, which also
-  covers every redirect hop.  Blocked requests are recorded and make the scan visible as "partial".
+  covers every redirect hop.  Blocked requests are recorded as notes (the page may render differently
+  than in production) but do not by themselves make the scan incomplete; only genuine coverage gaps do.
 * Service workers are blocked, WebSockets are closed, downloads are refused, dialogs are dismissed,
   permissions are denied.  The worker never types into or submits anything.
 """
@@ -128,6 +129,7 @@ def run(job: dict[str, Any]) -> dict[str, Any]:
         "console_errors": console_errors,
         "notes": notes,
         "incomplete_reasons": reasons_incomplete,
+        "evidence_truncation": {"omitted_nodes": 0, "by_rule": [], "truncated": False},
         "browser": {},
     }
 
@@ -294,18 +296,25 @@ def run(job: dict[str, Any]) -> dict[str, Any]:
                 result["error"] = {"code": "axe_failed", "message": _trim(str(exc), 300)}
                 return result
 
-            # Trim volume, keep honest counts.
+            # Trim volume, keep honest counts. Truncation does NOT make the scan incomplete:
+            # audit coverage is complete; only stored evidence is capped.
             truncated = 0
+            truncated_by_rule: list[dict[str, object]] = []
             for bucket in ("violations", "incomplete"):
                 for rule in axe_res[bucket]:
                     rule["node_count"] = len(rule["nodes"])
                     if len(rule["nodes"]) > MAX_NODES_PER_RULE:
-                        truncated += len(rule["nodes"]) - MAX_NODES_PER_RULE
+                        omitted = len(rule["nodes"]) - MAX_NODES_PER_RULE
+                        truncated += omitted
+                        truncated_by_rule.append({"id": rule["id"], "bucket": bucket, "omitted": omitted, "total": rule["node_count"]})
                         rule["nodes"] = rule["nodes"][:MAX_NODES_PER_RULE]
                     for n in rule["nodes"]:
                         n["html"] = _trim(n["html"], MAX_HTML_CHARS)
             if truncated:
-                reasons_incomplete.append(f"{truncated} affected node(s) beyond {MAX_NODES_PER_RULE} per rule were not stored (counts remain accurate).")
+                result["evidence_truncation"] = {"omitted_nodes": truncated, "by_rule": truncated_by_rule, "truncated": True}
+                notes.append(f"{truncated} finding instances were omitted from stored evidence (per-rule cap {MAX_NODES_PER_RULE}); total axe counts remain accurate — all findings were audited, only a subset retained as evidence (scan remains complete).")
+            else:
+                result["evidence_truncation"] = {"omitted_nodes": 0, "by_rule": [], "truncated": False}
             result["axe"] = axe_res
 
             # DOM evidence + element screenshots for top-level targets.

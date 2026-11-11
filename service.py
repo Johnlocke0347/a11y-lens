@@ -112,6 +112,18 @@ def scan(store: Store, settings: Settings, url: str, viewport: str | None = None
     warn = list(record["notes"])
     if record["blocked_requests"]:
         warn.append(f"{len(record['blocked_requests'])} off-origin request(s) blocked (policy).")
+    trunc = record.get("evidence_truncation") or {}
+    if trunc.get("truncated") or trunc.get("omitted_nodes", 0):
+        by_rule = trunc.get("by_rule", [])
+        detail = ""
+        if by_rule:
+            detail = " Affected rule(s): " + ", ".join(f"{r.get('id')}: {r.get('omitted')} omitted" for r in by_rule) + "."
+        warn.append(
+            f"{trunc.get('omitted_nodes', 0)} finding instances were omitted from stored evidence (per-rule cap 50); total axe counts remain accurate — all findings were audited, only a subset retained as evidence (scan remains complete).{detail} Do not interpret retained evidence counts as totals."
+        )
+        out["evidence_truncation"] = trunc
+        out["truncated"] = True
+        out["omitted_nodes"] = trunc.get("omitted_nodes", 0)
     if warn:
         out["warnings"] = warn
     out["next_steps"] = ("Fix issues with your normal file tools, then call a11y_scan again on the same target and "
@@ -202,8 +214,8 @@ def compare(store: Store, before_id: Any, after_id: Any = "latest") -> dict[str,
     jpath = store.report_path(f"compare-{before['id']}-vs-{after['id']}", "json")
     jpath.write_text(json.dumps(cmp, indent=2, ensure_ascii=False), encoding="utf-8")
     cap = 25
-    out = {k: cmp[k] for k in ("before_id", "after_id", "target", "verdict", "summary", "warnings", "caveat", "by_rule", "severity_changed")}
-    for k in ("introduced", "resolved", "remaining"):
+    out = {k: cmp[k] for k in ("before_id", "after_id", "target", "verdict", "summary", "warnings", "caveat", "by_rule", "severity_changed", "approximate", "evidence", "unverified", "indeterminate", "indeterminate_count") if k in cmp}
+    for k in ("introduced", "resolved", "remaining", "unverified"):
         out[k] = [{kk: vv for kk, vv in i.items() if kk != "wcag"} | {"html": _clip(i["html"], 180)} for i in cmp[k][:cap]]
         if len(cmp[k]) > cap:
             out[f"{k}_truncated"] = f"{len(cmp[k]) - cap} more in the JSON report"

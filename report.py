@@ -129,6 +129,26 @@ def render_scan_html(scan: dict[str, Any]) -> str:
         f'<p class="meta">{esc(scan["page"].get("title") or "")}</p>'
     )
     parts = [f'<div class="notice {cls}"><strong>Scope:</strong> {esc(scan["disclaimer"])}</div>']
+    # Surface truncation warning even for complete scans - evidence storage cap does not mean incomplete audit
+    trunc = scan.get("evidence_truncation") or {}
+    if trunc.get("truncated") or trunc.get("omitted_nodes", 0):
+        by_rule = trunc.get("by_rule", [])
+        rule_detail = ""
+        if by_rule:
+            parts_detail = ", ".join(f"{r.get('id')}: {r.get('omitted')} omitted" for r in by_rule)
+            rule_detail = f" Affected rule(s): {esc(parts_detail)}."
+        parts.append(f'<div class="notice"><strong>Evidence truncated:</strong> {esc(trunc.get("omitted_nodes", 0))} finding instances were omitted from stored evidence (per-rule cap 50); total axe counts remain accurate — all findings were audited, only a subset retained as evidence.{rule_detail}</div>')
+    else:
+        omitted_legacy = 0
+        legacy_rules = []
+        for r in scan.get("violations", []) + scan.get("review", []):
+            if r.get("node_count", len(r.get("nodes", []))) > len(r.get("nodes", [])):
+                diff = r["node_count"] - len(r["nodes"])
+                omitted_legacy += diff
+                legacy_rules.append(f"{r['id']}: {diff} omitted")
+        if omitted_legacy:
+            rule_detail = f" Affected rule(s): {esc(', '.join(legacy_rules))}." if legacy_rules else ""
+            parts.append(f'<div class="notice"><strong>Evidence truncated:</strong> {omitted_legacy} finding instances were omitted from stored evidence (per-rule cap 50); total axe counts remain accurate — all findings were audited, only a subset retained as evidence.{rule_detail}</div>')
     if status != "complete":
         why = scan.get("error", {}) or {}
         reasons = scan.get("incomplete_reasons") or []
@@ -173,19 +193,35 @@ def render_scan_html(scan: dict[str, Any]) -> str:
 def render_compare_html(cmp: dict[str, Any]) -> str:
     sm = cmp["summary"]
     verdict_text = {"improved": "Improved — no new violations introduced", "mixed": "Mixed — some fixed, some newly introduced",
-                    "regressed": "Regressed — new violations introduced, none fixed", "unchanged": "Unchanged"}[cmp["verdict"]]
-    cls = {"improved": "ok", "mixed": "", "regressed": "bad", "unchanged": ""}[cmp["verdict"]]
+                    "regressed": "Regressed — new violations introduced, none fixed", "unchanged": "Unchanged", "indeterminate": "Indeterminate — truncated evidence prevents definitive classification"}[cmp["verdict"]]
+    cls = {"improved": "ok", "mixed": "", "regressed": "bad", "unchanged": "", "indeterminate": ""}[cmp["verdict"]]
     header = (f'<p class="meta">{esc(cmp["before_id"])} → {esc(cmp["after_id"])}</p>'
               f"<h1>Before / after: {esc(cmp['target'])}</h1><p class='meta'>{esc(cmp['before_at'])} → {esc(cmp['after_at'])}</p>")
     parts = [f'<div class="notice {cls}"><strong>{esc(verdict_text)}.</strong> {esc(cmp["caveat"])}</div>']
     if cmp["warnings"]:
         parts.append('<div class="notice"><strong>Comparability warnings</strong><ul>' + "".join(f"<li>{esc(w)}</li>" for w in cmp["warnings"]) + "</ul></div>")
+    if sm.get("approximate"):
+        parts.append(
+            f'<div class="notice"><strong>Approximate comparison:</strong> Evidence was truncated; only {sm["before_retained"]} of {sm["before_total"]} before '
+            f'and {sm["after_retained"]} of {sm["after_total"]} after elements are retained as evidence. Matched counts (resolved/remaining/introduced) reflect only definitively classifiable retained evidence; unverified findings are listed separately and omitted nodes are not claimed resolved.</div>'
+        )
     parts.append("<h2>Summary</h2><ul class='counts'>"
-                 f"<li><b>{sm['before_instances']}</b><span>violating elements before</span></li>"
-                 f"<li><b>{sm['after_instances']}</b><span>violating elements after</span></li>"
-                 f"<li class='c-good'><b>{sm['resolved']}</b><span>resolved</span></li>"
-                 f"<li class='c-moderate'><b>{sm['remaining']}</b><span>remaining</span></li>"
-                 f"<li class='c-critical'><b>{sm['introduced']}</b><span>newly introduced</span></li></ul>")
+                 f"<li><b>{sm.get('before_total', sm['before_instances'])}</b><span>violating elements before (actual total)</span></li>"
+                 f"<li><b>{sm.get('after_total', sm['after_instances'])}</b><span>violating elements after (actual total)</span></li>"
+                 f"<li><b>{sm.get('before_retained', sm['before_instances'])}</b><span>retained evidence before (before_instances)</span></li>"
+                 f"<li><b>{sm.get('after_retained', sm['after_instances'])}</b><span>retained evidence after (after_instances)</span></li>"
+                 f"<li><b>{sm.get('before_omitted', 0)}</b><span>omitted evidence before</span></li>"
+                 f"<li><b>{sm.get('after_omitted', 0)}</b><span>omitted evidence after</span></li>"
+                 f"<li class='c-good'><b>{sm['resolved']}</b><span>resolved (definitive)</span></li>"
+                 f"<li class='c-moderate'><b>{sm['remaining']}</b><span>remaining (matched)</span></li>"
+                 f"<li class='c-critical'><b>{sm['introduced']}</b><span>newly introduced (definitive)</span></li>"
+                 f"<li><b>{sm.get('unverified', 0)}</b><span>unverified / indeterminate</span></li></ul>")
+    if sm.get("approximate") and "net_change" in sm:
+        nc_ret = sm.get("net_change_retained")
+        nc_ret_s = f"{nc_ret:+d}" if isinstance(nc_ret, int) else esc(str(nc_ret))
+        parts.append(f"<p>Net change in actual findings: {sm['net_change']:+d} (retained evidence net change: {nc_ret_s}). before_instances/after_instances report retained evidence counts; before_total/after_total report actual axe totals. Do not interpret retained counts as complete audit totals.</p>")
+    if sm.get("unverified", 0):
+        parts.append(f'<div class="notice"><strong>Unverified findings:</strong> {sm.get("unverified", 0)} retained element(s) could not be definitively classified because the opposite scan truncated evidence for those rules. They are listed under “Unverified” and not counted as definitively resolved/introduced.</div>')
 
     def table(title: str, items: list[dict[str, Any]], extra: str = "") -> str:
         if not items:
@@ -200,8 +236,16 @@ def render_compare_html(cmp: dict[str, Any]) -> str:
     parts.append(table("Newly introduced", cmp["introduced"]))
     parts.append(table("Resolved", cmp["resolved"]))
     parts.append(table("Remaining", cmp["remaining"], "Matched by"))
-    rows = "".join(f"<tr><td><code>{esc(r['rule_id'])}</code></td><td>{r['before']}</td><td>{r['after']}</td><td>{esc(r['state'])}</td></tr>" for r in cmp["by_rule"])
-    parts.append("<h2>By rule</h2><div class='tablewrap'><table><thead><tr><th scope='col'>Rule</th><th scope='col'>Before</th><th scope='col'>After</th><th scope='col'>State</th></tr></thead>"
+    if cmp.get("unverified"):
+        # Show unverified with reason
+        rows_unv = "".join(
+            f"<tr><td>{_impact_chip(i['impact'])}</td><td><code>{esc(i['rule_id'])}</code><br>{esc(i['help'])}</td>"
+            f"<td><code class='sel'>{esc(i['selector'])}</code><pre>{esc(i['html'])}</pre><br><em>{esc(i.get('unverified_reason',''))}</em></td>"
+            f"<td>{esc(i.get('origin',''))}</td></tr>" for i in cmp["unverified"])
+        head_unv = "<th scope='col'>Impact</th><th scope='col'>Rule</th><th scope='col'>Element</th><th scope='col'>Origin</th>"
+        parts.append(f"<h2>Unverified / indeterminate ({len(cmp['unverified'])})</h2><p>Unmatched retained findings for rules where the opposite scan truncated evidence – could have match in omitted evidence, not definitively resolved/introduced.</p><div class='tablewrap'><table><thead><tr>{head_unv}</tr></thead><tbody>{rows_unv}</tbody></table></div>")
+    rows = "".join(f"<tr><td><code>{esc(r['rule_id'])}</code></td><td>{r['before']}</td><td>{r['after']}</td><td>{esc(r['state'])}</td><td>{'yes' if r.get('truncated') else 'no'}</td></tr>" for r in cmp["by_rule"])
+    parts.append("<h2>By rule</h2><div class='tablewrap'><table><thead><tr><th scope='col'>Rule</th><th scope='col'>Before (retained)</th><th scope='col'>After (retained)</th><th scope='col'>State</th><th scope='col'>Truncated</th></tr></thead>"
                  f"<tbody>{rows}</tbody></table></div>")
     return _page(f"A11Y Lens — {cmp['before_id']} vs {cmp['after_id']}", header, "".join(parts))
 

@@ -140,7 +140,7 @@ def build_record(execution: dict[str, Any] | None, *, error: dict[str, Any] | No
             "target": target or {"label": "unknown", "scan_url": "", "kind": "url"},
             "config": config or {}, "browser": {}, "page": {}, "violations": [], "review": [], "passes": [],
             "summary": _empty_summary(), "coverage": {}, "blocked_requests": [], "console_errors": [],
-            "notes": [], "incomplete_reasons": [], "disclaimer": DISCLAIMER, "screenshots": {}, "duration_ms": 0,
+            "notes": [], "incomplete_reasons": [], "evidence_truncation": {"truncated": False, "omitted_nodes": 0, "by_rule": []}, "disclaimer": DISCLAIMER, "screenshots": {}, "duration_ms": 0,
         }
 
     w = execution["worker"]
@@ -168,6 +168,41 @@ def build_record(execution: dict[str, Any] | None, *, error: dict[str, Any] | No
     if status == "complete" and axe is None:  # defensive: never call a result-less scan complete
         status, err = "failed", {"code": "no_axe_result", "message": "Worker reported success without axe results."}
 
+    # Evidence truncation is NOT a coverage gap: compute explicit metadata.
+    # Prefer worker-provided evidence_truncation; fall back to deriving from node_count vs stored nodes.
+    trunc = w.get("evidence_truncation")
+    if not isinstance(trunc, dict):
+        # Fallback for older records: derive from violations/review
+        omitted = 0
+        by_rule: list[dict[str, object]] = []
+        for bucket_name, bucket in (("violations", violations), ("review", review)):
+            for r in bucket:
+                if r["node_count"] > len(r["nodes"]):
+                    diff = r["node_count"] - len(r["nodes"])
+                    omitted += diff
+                    by_rule.append({"id": r["id"], "bucket": bucket_name, "omitted": diff, "total": r["node_count"]})
+        trunc = {"truncated": omitted > 0, "omitted_nodes": omitted, "by_rule": by_rule}
+    else:
+        # Ensure required keys exist
+        trunc = {
+            "truncated": bool(trunc.get("truncated")),
+            "omitted_nodes": int(trunc.get("omitted_nodes", 0)),
+            "by_rule": list(trunc.get("by_rule", [])),
+        }
+        # If worker truncated flag is false but node_counts indicate truncation (old data), reconcile
+        # by recomputing; prefer the explicit derivation to avoid silent loss.
+        derived_omitted = sum(max(0, r["node_count"] - len(r["nodes"])) for r in violations + review)
+        if derived_omitted != trunc["omitted_nodes"]:
+            # Re-derive (handles legacy records where worker field missing or inconsistent)
+            omitted = derived_omitted
+            by_rule = []
+            for bucket_name, bucket in (("violations", violations), ("review", review)):
+                for r in bucket:
+                    if r["node_count"] > len(r["nodes"]):
+                        diff = r["node_count"] - len(r["nodes"])
+                        by_rule.append({"id": r["id"], "bucket": bucket_name, "omitted": diff, "total": r["node_count"]})
+            trunc = {"truncated": omitted > 0, "omitted_nodes": omitted, "by_rule": by_rule}
+
     return {
         "id": None,
         "created_at": created,
@@ -187,6 +222,7 @@ def build_record(execution: dict[str, Any] | None, *, error: dict[str, Any] | No
         "console_errors": w.get("console_errors", []),
         "notes": w.get("notes", []),
         "incomplete_reasons": w.get("incomplete_reasons", []),
+        "evidence_truncation": trunc,
         "disclaimer": DISCLAIMER,
         "screenshots": shots,
         "duration_ms": w.get("duration_ms", 0),
