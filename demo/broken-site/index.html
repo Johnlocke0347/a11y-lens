@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+  <div class="logo">Lumen Coffee</div>
+  <div class="nav">
+    <a href="#beans">Beans</a>
+    <a href="#subscribe">Subscribe</a>
+    <a href="https://example.invalid/cart" class="icon-link"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M3 4h2l2.4 11h10.2L20 7H6" fill="none" stroke="#4a2f1b" stroke-width="2"/></svg></a>
+  </div>
+</div>
+
+<div class="hero">
+  <h3>Small-batch coffee, roasted on Tuesdays</h3>
+  <p class="lede">Single-origin beans from four farms we have visited in person.</p>
+  <img src="hero.svg" width="520" height="220">
+  <div class="faint">Free shipping on orders over $40 &middot; ships within 48 hours</div>
+</div>
+
+<h5 id="beans">This week's beans</h5>
+<div class="grid">
+  <div class="card" id="card">
+    <img src="bean-a.svg" width="96" height="96">
+    <h2>Huila Reserve</h2>
+    <p class="faint">Caramel, red apple, cocoa nib</p>
+    <button class="add"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="#fff" stroke-width="2"/></svg></button>
+  </div>
+  <div class="card" id="card">
+    <img src="bean-b.svg" width="96" height="96" alt="">
+    <h2>Sidamo Natural</h2>
+    <p class="faint">Blueberry jam, jasmine</p>
+    <div class="add" role="buton" tabindex="3">Add</div>
+  </div>
+</div>
+
+<h2 id="subscribe">Get the roast calendar</h2>
+<form action="/subscribe" method="post" class="signup">
+  <input type="text" name="name" placeholder="Your name">
+  <input type="email" name="email" placeholder="Email address">
+  <select name="freq">
+    <option>Weekly</option>
+    <option>Monthly</option>
+  </select>
+  <button type="submit" class="go">Sign me up</button>
+</form>
+
+<iframe src="map.html" width="420" height="160"></iframe>
+
+<div class="footer">
+  <span class="faint">&copy; 2026 Lumen Coffee Roasters</span>
+  <a href="/privacy"></a>
+</div>
+</body>
+</html>

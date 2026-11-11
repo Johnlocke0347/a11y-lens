@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumen Coffee Roasters — small-batch coffee</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="logo">Lumen Coffee</div>
+  <div class="nav">
+    <a href="#beans">Beans</a>
+    <a href="#subscribe">Subscribe</a>
+    <a href="https://example.invalid/cart" class="icon-link" aria-label="Shopping cart"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M3 4h2l2.4 11h10.2L20 7H6" fill="none" stroke="#4a2f1b" stroke-width="2"/></svg></a>
+  </div>
+</header>
+
+<main>
+<div class="hero">
+  <h1>Small-batch coffee, roasted on Tuesdays</h1>
+  <p class="lede">Single-origin beans from four farms we have visited in person.</p>
+  <img src="hero.svg" width="520" height="220" alt="Freshly roasted coffee beans in a copper cooling tray">
+  <div class="faint">Free shipping on orders over $40 &middot; ships within 48 hours</div>
+</div>
+
+<h2 id="beans">This week's beans</h2>
+<div class="grid">
+  <div class="card" id="card-huila">
+    <img src="bean-a.svg" width="96" height="96" alt="Huila Reserve beans">
+    <h3>Huila Reserve</h3>
+    <p class="faint">Caramel, red apple, cocoa nib</p>
+    <button class="add" aria-label="Add Huila Reserve to cart"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="#fff" stroke-width="2"/></svg></button>
+  </div>
+  <div class="card" id="card-sidamo">
+    <img src="bean-b.svg" width="96" height="96" alt="Sidamo Natural beans">
+    <h3>Sidamo Natural</h3>
+    <p class="faint">Blueberry jam, jasmine</p>
+    <button class="add" aria-label="Add Sidamo Natural to cart">Add</button>
+  </div>
+</div>
+
+<h2 id="subscribe">Get the roast calendar</h2>
+<form action="/subscribe" method="post" class="signup">
+  <label>Your name <input type="text" name="name" autocomplete="name"></label>
+  <label>Email address <input type="email" name="email" autocomplete="email"></label>
+  <label>Frequency <select name="freq">
+    <option>Weekly</option>
+    <option>Monthly</option>
+  </select></label>
+  <button type="submit" class="go">Sign me up</button>
+</form>
+
+<iframe src="map.html" title="Map to the roastery" width="420" height="160"></iframe>
+</main>
+
+<footer class="footer">
+  <span class="faint">&copy; 2026 Lumen Coffee Roasters</span>
+  <a href="/privacy">Privacy policy</a>
+</footer>
+</body>
+</html>

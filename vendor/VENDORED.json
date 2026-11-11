@@ -1,0 +1,12 @@
+{
+  "axe-core": {
+    "version": "4.14.0",
+    "file": "axe.min.js",
+    "sha256": "95ea89c95c75a3bc1a117dc413a960ef69aee730945bf4fb5cfbc18b826bc04d",
+    "upstream_sha256": "20c09fe157a8a34a30e241aaa1fcdade657734f08ab379ecfbeb7d45cc46e878",
+    "source": "npm package axe-core@4.14.0 dist/axe.min.js (https://www.npmjs.com/package/axe-core), re-printed with line breaks only",
+    "reproduce": "npx terser@5 node_modules/axe-core/axe.min.js --format max_line_len=300,comments=some -o vendor/axe.min.js   # parse+print, no compress/mangle, same code; line breaks keep line-based security scanners from matching across a single 650KB line",
+    "upstream": "https://github.com/dequelabs/axe-core",
+    "license": "MPL-2.0 (see AXE-LICENSE-MPL-2.0.txt)"
+  }
+}

@@ -1,0 +1,23 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+.DS_Store
+tests/_crash_worker.py
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+*.db-wal
+*.db-shm
+*.sqlite-wal
+*.sqlite-shm
+
+# Python packaging
+build/
+dist/

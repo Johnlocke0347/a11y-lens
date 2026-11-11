@@ -1,0 +1,21 @@
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,"Times New Roman",serif;background:#faf6f0;color:#2b1d12}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 28px;background:#fff;border-bottom:1px solid #e5d9c9}
+.logo{font-weight:700;font-size:20px;color:#4a2f1b;letter-spacing:.5px}
+.nav{display:flex;gap:22px;align-items:center}
+.nav a{color:#8a7a6a;text-decoration:none}
+.hero{padding:34px 28px;max-width:720px}
+.hero h3{font-size:34px;margin:0 0 10px;line-height:1.15}
+.lede{color:#a89a8c;font-size:18px;margin:0 0 18px}
+.faint{color:#b9aea3;font-size:14px}
+h5{font-size:26px;margin:28px 28px 8px}
+.grid{display:flex;gap:18px;padding:0 28px;flex-wrap:wrap}
+.card{background:#fff;border:1px solid #e5d9c9;border-radius:10px;padding:16px;width:230px;position:relative}
+.card h2{font-size:18px;margin:10px 0 4px}
+.add{position:absolute;right:14px;bottom:14px;width:34px;height:34px;border-radius:50%;background:#7a4a24;color:#fff;border:0;display:flex;align-items:center;justify-content:center;font:13px sans-serif;cursor:pointer}
+.signup{display:flex;gap:10px;flex-wrap:wrap;padding:0 28px 24px}
+.signup input,.signup select{padding:9px 10px;border:1px solid #cdbfae;border-radius:6px;font-size:15px}
+.go{background:#c9a27c;color:#fff;border:0;border-radius:6px;padding:10px 16px;font-size:15px}
+h2#subscribe{margin:28px 28px 10px}
+iframe{margin:0 28px;border:1px solid #e5d9c9}
+.footer{padding:24px 28px;display:flex;gap:16px}

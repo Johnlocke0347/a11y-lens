@@ -1,0 +1,2473 @@
+{
+  "id": "scan-0001",
+  "created_at": "2026-11-10T10:12:59Z",
+  "status": "complete",
+  "error": null,
+  "target": {
+    "label": "<repo>/demo/broken-site/index.html",
+    "scan_url": "http://127.0.0.1:34759/index.html",
+    "kind": "local",
+    "origin": "http://127.0.0.1:34759",
+    "loopback": true
+  },
+  "config": {
+    "viewport_name": "desktop",
+    "viewport": {
+      "width": 1280,
+      "height": 800,
+      "mobile": false
+    },
+    "timeout_s": 45,
+    "tags": [
+      "wcag2a",
+      "wcag2aa",
+      "wcag21a",
+      "wcag21aa",
+      "wcag22aa",
+      "best-practice"
+    ],
+    "axe_version": "4.14.0",
+    "settle_ms": 300,
+    "reduced_motion": true,
+    "color_scheme": "light",
+    "locale": "en-US",
+    "timezone": "UTC"
+  },
+  "browser": {
+    "name": "chromium",
+    "version": "153.0.8010.0"
+  },
+  "page": {
+    "final_url": "http://127.0.0.1:34759/index.html",
+    "status_code": 200,
+    "title": "",
+    "lang": null,
+    "viewport": {
+      "width": 1280,
+      "height": 800,
+      "mobile": false
+    }
+  },
+  "violations": [
+    {
+      "id": "aria-roles",
+      "impact": "critical",
+      "help": "ARIA roles used must conform to valid values",
+      "description": "Ensure all elements with a role attribute use a valid value",
+      "help_url": "https://dequeuniversity.com/rules/axe/4.14/aria-roles?application=axeAPI",
+      "tags": [
+        "cat.aria",
+        "wcag2a",
+        "wcag412",
+        "EN-301-549",
+        "EN-9.4.1.2",
+        "RGAAv4",
+        "RGAA-7.1.1"
+      ],
+      "wcag": {
+        "criteria": [
+          "4.1.2"
+        ],
+        "level": "A",
+        "since": "2.0",
+        "category": "wcag"
+      },
+      "fix_hint": "Use a valid WAI-ARIA role value.",
+      "node_count": 1,
+      "nodes": [
+        {
+          "selector": "div[role=\"buton\"]",
+          "target": [
+            "div[role=\"buton\"]"
+          ],
+          "html": "<div class=\"add\" role=\"buton\" tabindex=\"3\">Add</div>",
+          "impact": "critical",
+          "failure_summary": "Fix all of the following:\n  Role must be one of the valid ARIA roles: buton",
+          "checks": [
+            {
+              "kind": "none",
+              "id": "invalidrole",
+              "message": "Role must be one of the valid ARIA roles: buton",
+              "data": [
+                "buton"
+              ]
+            }
+          ],
+          "evidence": {
+            "tag": "div",
+            "attrs": {
+              "role": "buton",
+              "tabindex": "3"
+            },
+            "text": "Add",
+            "visible": true,
+            "box": {
+              "x": 457,
+              "y": 677,
+              "w": 34,
+              "h": 34
+            },
+            "style": {
+              "color": "rgb(255, 255, 255)",
+              "background": "rgb(122, 74, 36)",
+              "fontSize": "13px",
+              "fontWeight": "400"
+            },
+            "focusable": true
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "b30b849a3329c16d",
+            "html_key": "dcdc0d80e3c42c34"
+          }
+        }
+      ]
+    },
+    {
+      "id": "button-name",
+      "impact": "critical",
+      "help": "Buttons must have discernible text",
+      "description": "Ensure buttons have discernible text",
+      "help_url": "https://dequeuniversity.com/rules/axe/4.14/button-name?application=axeAPI",
+      "tags": [
+        "cat.name-role-value",
+        "wcag2a",
+        "wcag412",
+        "section508",
+        "section508.22.a",
+        "TTv5",
+        "TT6.a",
+        "EN-301-549",
+        "EN-9.4.1.2",
+        "ACT",
+        "RGAAv4",
+        "RGAA-11.9.1"
+      ],
+      "wcag": {
+        "criteria": [
+          "4.1.2"
+        ],
+        "level": "A",
+        "since": "2.0",
+        "category": "wcag"
+      },
+      "fix_hint": "Give the button visible text or an accessible name: <button aria-label=\"Close dialog\">…</button>.",
+      "node_count": 1,
+      "nodes": [
+        {
+          "selector": ".card:nth-child(1) > button",
+          "target": [
+            ".card:nth-child(1) > button"
+          ],
+          "html": "<button class=\"add\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\"><path d=\"M8 2v12M2 8h12\" stroke=\"#fff\" stroke-width=\"2\"></path></svg></button>",
+          "impact": "critical",
+          "failure_summary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "button-has-visible-text",
+              "message": "Element does not have inner text that is visible to screen readers"
+            },
+            {
+              "kind": "any",
+              "id": "aria-label",
+              "message": "aria-label attribute does not exist or is empty"
+            },
+            {
+              "kind": "any",
+              "id": "aria-labelledby",
+              "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
+            },
+            {
+              "kind": "any",
+              "id": "non-empty-title",
+              "message": "Element has no title attribute",
+              "data": {
+                "messageKey": "noAttr"
+              }
+            },
+            {
+              "kind": "any",
+              "id": "implicit-label",
+              "message": "Element does not have an implicit (wrapped) <label>"
+            },
+            {
+              "kind": "any",
+              "id": "explicit-label",
+              "message": "Element does not have an explicit <label>"
+            },
+            {
+              "kind": "any",
+              "id": "presentational-role",
+              "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+            }
+          ],
+          "evidence": {
+            "tag": "button",
+            "attrs": {},
+            "text": "",
+            "visible": true,
+            "box": {
+              "x": 209,
+              "y": 677,
+              "w": 34,
+              "h": 34
+            },
+            "style": {
+              "color": "rgb(255, 255, 255)",
+              "background": "rgb(122, 74, 36)",
+              "fontSize": "13px",
+              "fontWeight": "400"
+            },
+            "focusable": true
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "2d854df3e4aa0312",
+            "html_key": "44a3807ace17e620"
+          }
+        }
+      ]
+    },
+    {
+      "id": "image-alt",
+      "impact": "critical",
+      "help": "Images must have alternative text",
+      "description": "Ensure <img> elements have alternative text or a role of none or presentation",
+      "help_url": "https://dequeuniversity.com/rules/axe/4.14/image-alt?application=axeAPI",
+      "tags": [
+        "cat.text-alternatives",
+        "wcag2a",
+        "wcag111",
+        "section508",
+        "section508.22.a",
+        "TTv5",
+        "TT7.a",
+        "TT7.b",
+        "EN-301-549",
+        "EN-9.1.1.1",
+        "ACT",
+        "RGAAv4",
+        "RGAA-1.1.1"
+      ],
+      "wcag": {
+        "criteria": [
+          "1.1.1"
+        ],
+        "level": "A",
+        "since": "2.0",
+        "category": "wcag"
+      },
+      "fix_hint": "Add alt text describing the image's purpose (alt=\"\" if purely decorative): <img src=\"x.png\" alt=\"Team photo, 2026 offsite\">.",
+      "node_count": 3,
+      "nodes": [
+        {
+          "selector": "img[src$=\"hero.svg\"]",
+          "target": [
+            "img[src$=\"hero.svg\"]"
+          ],
+          "html": "<img src=\"hero.svg\" width=\"520\" height=\"220\">",
+          "impact": "critical",
+          "failure_summary": "Fix any of the following:\n  Element does not have an alt attribute\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "has-alt",
+              "message": "Element does not have an alt attribute"
+            },
+            {
+              "kind": "any",
+              "id": "aria-label",
+              "message": "aria-label attribute does not exist or is empty"
+            },
+            {
+              "kind": "any",
+              "id": "aria-labelledby",
+              "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
+            },
+            {
+              "kind": "any",
+              "id": "non-empty-title",
+              "message": "Element has no title attribute",
+              "data": {
+                "messageKey": "noAttr"
+              }
+            },
+            {
+              "kind": "any",
+              "id": "presentational-role",
+              "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+            }
+          ],
+          "evidence": {
+            "tag": "img",
+            "attrs": {},
+            "text": "",
+            "visible": true,
+            "box": {
+              "x": 28,
+              "y": 177,
+              "w": 520,
+              "h": 220
+            },
+            "style": {
+              "color": "rgb(43, 29, 18)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "16px",
+              "fontWeight": "400"
+            },
+            "focusable": false
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "7fff917d73468887",
+            "html_key": "1081fa4032c7c63b"
+          }
+        },
+        {
+          "selector": "img[src$=\"bean-a.svg\"]",
+          "target": [
+            "img[src$=\"bean-a.svg\"]"
+          ],
+          "html": "<img src=\"bean-a.svg\" width=\"96\" height=\"96\">",
+          "impact": "critical",
+          "failure_summary": "Fix any of the following:\n  Element does not have an alt attribute\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "has-alt",
+              "message": "Element does not have an alt attribute"
+            },
+            {
+              "kind": "any",
+              "id": "aria-label",
+              "message": "aria-label attribute does not exist or is empty"
+            },
+            {
+              "kind": "any",
+              "id": "aria-labelledby",
+              "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
+            },
+            {
+              "kind": "any",
+              "id": "non-empty-title",
+              "message": "Element has no title attribute",
+              "data": {
+                "messageKey": "noAttr"
+              }
+            },
+            {
+              "kind": "any",
+              "id": "presentational-role",
+              "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+            }
+          ],
+          "evidence": {
+            "tag": "img",
+            "attrs": {},
+            "text": "",
+            "visible": true,
+            "box": {
+              "x": 45,
+              "y": 534,
+              "w": 96,
+              "h": 96
+            },
+            "style": {
+              "color": "rgb(43, 29, 18)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "16px",
+              "fontWeight": "400"
+            },
+            "focusable": false
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "cbb241bf16135b2b",
+            "html_key": "d13b7ae6f04f545c"
+          }
+        },
+        {
+          "selector": "iframe >> img",
+          "target": [
+            "iframe",
+            "img"
+          ],
+          "html": "<img src=\"pin.svg\" width=\"28\" height=\"28\">",
+          "impact": "critical",
+          "failure_summary": "Fix any of the following:\n  Element does not have an alt attribute\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "has-alt",
+              "message": "Element does not have an alt attribute"
+            },
+            {
+              "kind": "any",
+              "id": "aria-label",
+              "message": "aria-label attribute does not exist or is empty"
+            },
+            {
+              "kind": "any",
+              "id": "aria-labelledby",
+              "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
+            },
+            {
+              "kind": "any",
+              "id": "non-empty-title",
+              "message": "Element has no title attribute",
+              "data": {
+                "messageKey": "noAttr"
+              }
+            },
+            {
+              "kind": "any",
+              "id": "presentational-role",
+              "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+            }
+          ],
+          "evidence": null,
+          "has_screenshot": false,
+          "fingerprint": {
+            "selector_key": "1d0518882f392a93",
+            "html_key": "ad43213dd19f6321"
+          }
+        }
+      ]
+    },
+    {
+      "id": "select-name",
+      "impact": "critical",
+      "help": "Select element must have an accessible name",
+      "description": "Ensure select element has an accessible name",
+      "help_url": "https://dequeuniversity.com/rules/axe/4.14/select-name?application=axeAPI",
+      "tags": [
+        "cat.forms",
+        "wcag2a",
+        "wcag412",
+        "section508",
+        "section508.22.n",
+        "TTv5",
+        "TT5.c",
+        "EN-301-549",
+        "EN-9.4.1.2",
+        "ACT",
+        "RGAAv4",
+        "RGAA-11.1.1"
+      ],
+      "wcag": {
+        "criteria": [
+          "4.1.2"
+        ],
+        "level": "A",
+        "since": "2.0",
+        "category": "wcag"
+      },
+      "fix_hint": "Associate a <label for=…> or aria-label with the <select>.",
+      "node_count": 1,
+      "nodes": [
+        {
+          "selector": "select",
+          "target": [
+            "select"
+          ],
+          "html": "<select name=\"freq\">\n    <option>Weekly</option>\n    <option>Monthly</option>\n  </select>",
+          "impact": "critical",
+          "failure_summary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "implicit-label",
+              "message": "Element does not have an implicit (wrapped) <label>"
+            },
+            {
+              "kind": "any",
+              "id": "explicit-label",
+              "message": "Element does not have an explicit <label>"
+            },
+            {
+              "kind": "any",
+              "id": "aria-label",
+              "message": "aria-label attribute does not exist or is empty"
+            },
+            {
+              "kind": "any",
+              "id": "aria-labelledby",
+              "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
+            },
+            {
+              "kind": "any",
+              "id": "non-empty-title",
+              "message": "Element has no title attribute",
+              "data": {
+                "messageKey": "noAttr"
+              }
+            },
+            {
+              "kind": "any",
+              "id": "presentational-role",
+              "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+            }
+          ],
+          "evidence": {
+            "tag": "select",
+            "attrs": {
+              "name": "freq"
+            },
+            "text": "Weekly Monthly",
+            "visible": true,
+            "box": {
+              "x": 490,
+              "y": 791,
+              "w": 94,
+              "h": 39
+            },
+            "style": {
+              "color": "rgb(0, 0, 0)",
+              "background": "rgb(239, 239, 239)",
+              "fontSize": "15px",
+              "fontWeight": "400"
+            },
+            "focusable": true
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "dd4c8a1ca805feda",
+            "html_key": "4b4a3f70369a9b00"
+          }
+        }
+      ]
+    },
+    {
+      "id": "color-contrast",
+      "impact": "serious",
+      "help": "Elements must meet minimum color contrast ratio thresholds",
+      "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+      "help_url": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+      "tags": [
+        "cat.color",
+        "wcag2aa",
+        "wcag143",
+        "TTv5",
+        "TT13.c",
+        "EN-301-549",
+        "EN-9.1.4.3",
+        "ACT",
+        "RGAAv4",
+        "RGAA-3.2.1"
+      ],
+      "wcag": {
+        "criteria": [
+          "1.4.3"
+        ],
+        "level": "AA",
+        "since": "2.0",
+        "category": "wcag"
+      },
+      "fix_hint": "Increase foreground/background contrast to at least 4.5:1 (3:1 for large text). The evidence lists the measured ratio and colours.",
+      "node_count": 8,
+      "nodes": [
+        {
+          "selector": "a[href$=\"#beans\"]",
+          "target": [
+            "a[href$=\"#beans\"]"
+          ],
+          "html": "<a href=\"#beans\">Beans</a>",
+          "impact": "serious",
+          "failure_summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.13 (foreground color: #8a7a6a, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "color-contrast",
+              "message": "Element has insufficient color contrast of 4.13 (foreground color: #8a7a6a, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1",
+              "data": {
+                "fgColor": "#8a7a6a",
+                "bgColor": "#ffffff",
+                "contrastRatio": 4.13,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "messageKey": null,
+                "expectedContrastRatio": "4.5:1",
+                "shadowColor": null,
+                "colorParse": null
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "a",
+            "attrs": {
+              "href": "#beans"
+            },
+            "text": "Beans",
+            "visible": true,
+            "box": {
+              "x": 1085,
+              "y": 18,
+              "w": 39,
+              "h": 18
+            },
+            "style": {
+              "color": "rgb(138, 122, 106)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "16px",
+              "fontWeight": "400"
+            },
+            "focusable": true
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "1b767ee142c84df1",
+            "html_key": "555823939516b065"
+          }
+        },
+        {
+          "selector": "a[href$=\"#subscribe\"]",
+          "target": [
+            "a[href$=\"#subscribe\"]"
+          ],
+          "html": "<a href=\"#subscribe\">Subscribe</a>",
+          "impact": "serious",
+          "failure_summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.13 (foreground color: #8a7a6a, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "color-contrast",
+              "message": "Element has insufficient color contrast of 4.13 (foreground color: #8a7a6a, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1",
+              "data": {
+                "fgColor": "#8a7a6a",
+                "bgColor": "#ffffff",
+                "contrastRatio": 4.13,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "messageKey": null,
+                "expectedContrastRatio": "4.5:1",
+                "shadowColor": null,
+                "colorParse": null
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "a",
+            "attrs": {
+              "href": "#subscribe"
+            },
+            "text": "Subscribe",
+            "visible": true,
+            "box": {
+              "x": 1146,
+              "y": 18,
+              "w": 62,
+              "h": 18
+            },
+            "style": {
+              "color": "rgb(138, 122, 106)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "16px",
+              "fontWeight": "400"
+            },
+            "focusable": true
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "f518b0e8847e9161",
+            "html_key": "ee862c642c676dc8"
+          }
+        },
+        {
+          "selector": ".lede",
+          "target": [
+            ".lede"
+          ],
+          "html": "<p class=\"lede\">Single-origin beans from four farms we have visited in person.</p>",
+          "impact": "serious",
+          "failure_summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.54 (foreground color: #a89a8c, background color: #faf6f0, font size: 13.5pt (18px), font weight: normal). Expected contrast ratio of 4.5:1",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "color-contrast",
+              "message": "Element has insufficient color contrast of 2.54 (foreground color: #a89a8c, background color: #faf6f0, font size: 13.5pt (18px), font weight: normal). Expected contrast ratio of 4.5:1",
+              "data": {
+                "fgColor": "#a89a8c",
+                "bgColor": "#faf6f0",
+                "contrastRatio": 2.54,
+                "fontSize": "13.5pt (18px)",
+                "fontWeight": "normal",
+                "messageKey": null,
+                "expectedContrastRatio": "4.5:1",
+                "shadowColor": null,
+                "colorParse": null
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "p",
+            "attrs": {},
+            "text": "Single-origin beans from four farms we have visited in person.",
+            "visible": true,
+            "box": {
+              "x": 28,
+              "y": 138,
+              "w": 664,
+              "h": 21
+            },
+            "style": {
+              "color": "rgb(168, 154, 140)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "18px",
+              "fontWeight": "400"
+            },
+            "focusable": false
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "51ec1c66bb371dab",
+            "html_key": "efa1b12f3b8657ed"
+          }
+        },
+        {
+          "selector": ".hero > .faint",
+          "target": [
+            ".hero > .faint"
+          ],
+          "html": "<div class=\"faint\">Free shipping on orders over $40 · ships within 48 hours</div>",
+          "impact": "serious",
+          "failure_summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.02 (foreground color: #b9aea3, background color: #faf6f0, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "color-contrast",
+              "message": "Element has insufficient color contrast of 2.02 (foreground color: #b9aea3, background color: #faf6f0, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1",
+              "data": {
+                "fgColor": "#b9aea3",
+                "bgColor": "#faf6f0",
+                "contrastRatio": 2.02,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "messageKey": null,
+                "expectedContrastRatio": "4.5:1",
+                "shadowColor": null,
+                "colorParse": null
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "div",
+            "attrs": {},
+            "text": "Free shipping on orders over $40 · ships within 48 hours",
+            "visible": true,
+            "box": {
+              "x": 28,
+              "y": 401,
+              "w": 664,
+              "h": 16
+            },
+            "style": {
+              "color": "rgb(185, 174, 163)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "14px",
+              "fontWeight": "400"
+            },
+            "focusable": false
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "72f35e731d885cb9",
+            "html_key": "00ce2875b4427174"
+          }
+        },
+        {
+          "selector": ".card:nth-child(1) > p",
+          "target": [
+            ".card:nth-child(1) > p"
+          ],
+          "html": "<p class=\"faint\">Caramel, red apple, cocoa nib</p>",
+          "impact": "serious",
+          "failure_summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.17 (foreground color: #b9aea3, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "color-contrast",
+              "message": "Element has insufficient color contrast of 2.17 (foreground color: #b9aea3, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1",
+              "data": {
+                "fgColor": "#b9aea3",
+                "bgColor": "#ffffff",
+                "contrastRatio": 2.17,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "messageKey": null,
+                "expectedContrastRatio": "4.5:1",
+                "shadowColor": null,
+                "colorParse": null
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "p",
+            "attrs": {},
+            "text": "Caramel, red apple, cocoa nib",
+            "visible": true,
+            "box": {
+              "x": 45,
+              "y": 679,
+              "w": 196,
+              "h": 16
+            },
+            "style": {
+              "color": "rgb(185, 174, 163)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "14px",
+              "fontWeight": "400"
+            },
+            "focusable": false
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "4a4132e413861455",
+            "html_key": "bcae3baac439d9fd"
+          }
+        },
+        {
+          "selector": ".card:nth-child(2) > p",
+          "target": [
+            ".card:nth-child(2) > p"
+          ],
+          "html": "<p class=\"faint\">Blueberry jam, jasmine</p>",
+          "impact": "serious",
+          "failure_summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.17 (foreground color: #b9aea3, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "color-contrast",
+              "message": "Element has insufficient color contrast of 2.17 (foreground color: #b9aea3, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1",
+              "data": {
+                "fgColor": "#b9aea3",
+                "bgColor": "#ffffff",
+                "contrastRatio": 2.17,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "messageKey": null,
+                "expectedContrastRatio": "4.5:1",
+                "shadowColor": null,
+                "colorParse": null
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "p",
+            "attrs": {},
+            "text": "Blueberry jam, jasmine",
+            "visible": true,
+            "box": {
+              "x": 293,
+              "y": 679,
+              "w": 196,
+              "h": 16
+            },
+            "style": {
+              "color": "rgb(185, 174, 163)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "14px",
+              "fontWeight": "400"
+            },
+            "focusable": false
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "ffde8a9b39a89a96",
+            "html_key": "80309cd908daeab1"
+          }
+        },
+        {
+          "selector": ".go",
+          "target": [
+            ".go"
+          ],
+          "html": "<button type=\"submit\" class=\"go\">Sign me up</button>",
+          "impact": "serious",
+          "failure_summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.34 (foreground color: #ffffff, background color: #c9a27c, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "color-contrast",
+              "message": "Element has insufficient color contrast of 2.34 (foreground color: #ffffff, background color: #c9a27c, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1",
+              "data": {
+                "fgColor": "#ffffff",
+                "bgColor": "#c9a27c",
+                "contrastRatio": 2.34,
+                "fontSize": "11.3pt (15px)",
+                "fontWeight": "normal",
+                "messageKey": null,
+                "expectedContrastRatio": "4.5:1",
+                "shadowColor": null,
+                "colorParse": null
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "button",
+            "attrs": {
+              "type": "submit"
+            },
+            "text": "Sign me up",
+            "visible": true,
+            "box": {
+              "x": 594,
+              "y": 791,
+              "w": 106,
+              "h": 39
+            },
+            "style": {
+              "color": "rgb(255, 255, 255)",
+              "background": "rgb(201, 162, 124)",
+              "fontSize": "15px",
+              "fontWeight": "400"
+            },
+            "focusable": true
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "15b7944801461dea",
+            "html_key": "bf7a9f47a5bc1ed2"
+          }
+        },
+        {
+          "selector": "span",
+          "target": [
+            "span"
+          ],
+          "html": "<span class=\"faint\">© 2026 Lumen Coffee Roasters</span>",
+          "impact": "serious",
+          "failure_summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.02 (foreground color: #b9aea3, background color: #faf6f0, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "color-contrast",
+              "message": "Element has insufficient color contrast of 2.02 (foreground color: #b9aea3, background color: #faf6f0, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1",
+              "data": {
+                "fgColor": "#b9aea3",
+                "bgColor": "#faf6f0",
+                "contrastRatio": 2.02,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "messageKey": null,
+                "expectedContrastRatio": "4.5:1",
+                "shadowColor": null,
+                "colorParse": null
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "span",
+            "attrs": {},
+            "text": "© 2026 Lumen Coffee Roasters",
+            "visible": true,
+            "box": {
+              "x": 28,
+              "y": 1042,
+              "w": 180,
+              "h": 16
+            },
+            "style": {
+              "color": "rgb(185, 174, 163)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "14px",
+              "fontWeight": "400"
+            },
+            "focusable": false
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "05c63797a7a69fac",
+            "html_key": "233a44228c5ad409"
+          }
+        }
+      ]
+    },
+    {
+      "id": "document-title",
+      "impact": "serious",
+      "help": "Documents must have <title> element to aid in navigation",
+      "description": "Ensure each HTML document contains a non-empty <title> element",
+      "help_url": "https://dequeuniversity.com/rules/axe/4.14/document-title?application=axeAPI",
+      "tags": [
+        "cat.text-alternatives",
+        "wcag2a",
+        "wcag242",
+        "TTv5",
+        "TT12.a",
+        "EN-301-549",
+        "EN-9.2.4.2",
+        "ACT",
+        "RGAAv4",
+        "RGAA-8.5.1"
+      ],
+      "wcag": {
+        "criteria": [
+          "2.4.2"
+        ],
+        "level": "A",
+        "since": "2.0",
+        "category": "wcag"
+      },
+      "fix_hint": "Add a descriptive, unique <title> inside <head>.",
+      "node_count": 1,
+      "nodes": [
+        {
+          "selector": "html",
+          "target": [
+            "html"
+          ],
+          "html": "<html>",
+          "impact": "serious",
+          "failure_summary": "Fix any of the following:\n  Document does not have a non-empty <title> element",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "doc-has-title",
+              "message": "Document does not have a non-empty <title> element"
+            }
+          ],
+          "evidence": {
+            "tag": "html",
+            "attrs": {},
+            "text": "Lumen Coffee Beans Subscribe Small-batch coffee, roasted on Tuesdays Single-origin beans from four farms we have visited",
+            "visible": true,
+            "box": {
+              "x": 0,
+              "y": 0,
+              "w": 1280,
+              "h": 1082
+            },
+            "style": {
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "16px",
+              "fontWeight": "400"
+            },
+            "focusable": false
+          },
+          "has_screenshot": false,
+          "fingerprint": {
+            "selector_key": "0f5302cce9ee538c",
+            "html_key": "92a0d85d48ac9d20"
+          }
+        }
+      ]
+    },
+    {
+      "id": "frame-title",
+      "impact": "serious",
+      "help": "Frames must have an accessible name",
+      "description": "Ensure <iframe> and <frame> elements have an accessible name",
+      "help_url": "https://dequeuniversity.com/rules/axe/4.14/frame-title?application=axeAPI",
+      "tags": [
+        "cat.text-alternatives",
+        "wcag2a",
+        "wcag412",
+        "section508",
+        "section508.22.i",
+        "TTv5",
+        "TT12.d",
+        "EN-301-549",
+        "EN-9.4.1.2",
+        "RGAAv4",
+        "RGAA-2.1.1"
+      ],
+      "wcag": {
+        "criteria": [
+          "4.1.2"
+        ],
+        "level": "A",
+        "since": "2.0",
+        "category": "wcag"
+      },
+      "fix_hint": "Give each <iframe> a descriptive title attribute.",
+      "node_count": 1,
+      "nodes": [
+        {
+          "selector": "iframe",
+          "target": [
+            "iframe"
+          ],
+          "html": "<iframe src=\"map.html\" width=\"420\" height=\"160\"></iframe>",
+          "impact": "serious",
+          "failure_summary": "Fix any of the following:\n  Element has no title attribute\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "non-empty-title",
+              "message": "Element has no title attribute",
+              "data": {
+                "messageKey": "noAttr"
+              }
+            },
+            {
+              "kind": "any",
+              "id": "aria-label",
+              "message": "aria-label attribute does not exist or is empty"
+            },
+            {
+              "kind": "any",
+              "id": "aria-labelledby",
+              "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
+            },
+            {
+              "kind": "any",
+              "id": "presentational-role",
+              "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+            }
+          ],
+          "evidence": {
+            "tag": "iframe",
+            "attrs": {},
+            "text": "",
+            "visible": true,
+            "box": {
+              "x": 28,
+              "y": 854,
+              "w": 420,
+              "h": 160
+            },
+            "style": {
+              "color": "rgb(43, 29, 18)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "16px",
+              "fontWeight": "400"
+            },
+            "focusable": true
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "eddceeff4bd51995",
+            "html_key": "b35d80e5ac6c67f8"
+          }
+        }
+      ]
+    },
+    {
+      "id": "html-has-lang",
+      "impact": "serious",
+      "help": "<html> element must have a lang attribute",
+      "description": "Ensure every HTML document has a lang attribute",
+      "help_url": "https://dequeuniversity.com/rules/axe/4.14/html-has-lang?application=axeAPI",
+      "tags": [
+        "cat.language",
+        "wcag2a",
+        "wcag311",
+        "TTv5",
+        "TT11.a",
+        "EN-301-549",
+        "EN-9.3.1.1",
+        "ACT",
+        "RGAAv4",
+        "RGAA-8.3.1"
+      ],
+      "wcag": {
+        "criteria": [
+          "3.1.1"
+        ],
+        "level": "A",
+        "since": "2.0",
+        "category": "wcag"
+      },
+      "fix_hint": "Declare the page language: <html lang=\"en\">.",
+      "node_count": 1,
+      "nodes": [
+        {
+          "selector": "html",
+          "target": [
+            "html"
+          ],
+          "html": "<html>",
+          "impact": "serious",
+          "failure_summary": "Fix any of the following:\n  The <html> element does not have a lang attribute",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "has-lang",
+              "message": "The <html> element does not have a lang attribute",
+              "data": {
+                "messageKey": "noLang"
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "html",
+            "attrs": {},
+            "text": "Lumen Coffee Beans Subscribe Small-batch coffee, roasted on Tuesdays Single-origin beans from four farms we have visited",
+            "visible": true,
+            "box": {
+              "x": 0,
+              "y": 0,
+              "w": 1280,
+              "h": 1082
+            },
+            "style": {
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "16px",
+              "fontWeight": "400"
+            },
+            "focusable": false
+          },
+          "has_screenshot": false,
+          "fingerprint": {
+            "selector_key": "6d6528fa83244be5",
+            "html_key": "07a60017f9c58292"
+          }
+        }
+      ]
+    },
+    {
+      "id": "link-name",
+      "impact": "serious",
+      "help": "Links must have discernible text",
+      "description": "Ensure links have discernible text",
+      "help_url": "https://dequeuniversity.com/rules/axe/4.14/link-name?application=axeAPI",
+      "tags": [
+        "cat.name-role-value",
+        "wcag2a",
+        "wcag244",
+        "wcag412",
+        "section508",
+        "section508.22.a",
+        "TTv5",
+        "TT6.a",
+        "EN-301-549",
+        "EN-9.2.4.4",
+        "EN-9.4.1.2",
+        "ACT",
+        "RGAAv4",
+        "RGAA-6.2.1"
+      ],
+      "wcag": {
+        "criteria": [
+          "2.4.4",
+          "4.1.2"
+        ],
+        "level": "A",
+        "since": "2.0",
+        "category": "wcag"
+      },
+      "fix_hint": "Give the link discernible text (or aria-label on icon-only links): <a href=\"/cart\" aria-label=\"Cart\">…</a>.",
+      "node_count": 2,
+      "nodes": [
+        {
+          "selector": ".icon-link",
+          "target": [
+            ".icon-link"
+          ],
+          "html": "<a href=\"https://example.invalid/cart\" class=\"icon-link\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\"><path d=\"M3 4h2l2.4 11h10.2L20 7H6\" fill=\"none\" stroke=\"#4a2f1b\" stroke-width=\"2\"></path></svg></a>",
+          "impact": "serious",
+          "failure_summary": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "has-visible-text",
+              "message": "Element does not have text that is visible to screen readers"
+            },
+            {
+              "kind": "any",
+              "id": "aria-label",
+              "message": "aria-label attribute does not exist or is empty"
+            },
+            {
+              "kind": "any",
+              "id": "aria-labelledby",
+              "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
+            },
+            {
+              "kind": "any",
+              "id": "non-empty-title",
+              "message": "Element has no title attribute",
+              "data": {
+                "messageKey": "noAttr"
+              }
+            },
+            {
+              "kind": "none",
+              "id": "focusable-no-name",
+              "message": "Element is in tab order and does not have accessible text"
+            }
+          ],
+          "evidence": {
+            "tag": "a",
+            "attrs": {
+              "href": "https://example.invalid/cart"
+            },
+            "text": "",
+            "visible": true,
+            "box": {
+              "x": 1230,
+              "y": 14,
+              "w": 22,
+              "h": 26
+            },
+            "style": {
+              "color": "rgb(138, 122, 106)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "16px",
+              "fontWeight": "400"
+            },
+            "focusable": true
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "7a6c2f8a66504a5a",
+            "html_key": "120f7b33a45e6075"
+          }
+        },
+        {
+          "selector": "a[href$=\"privacy\"]",
+          "target": [
+            "a[href$=\"privacy\"]"
+          ],
+          "html": "<a href=\"/privacy\"></a>",
+          "impact": "serious",
+          "failure_summary": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "has-visible-text",
+              "message": "Element does not have text that is visible to screen readers"
+            },
+            {
+              "kind": "any",
+              "id": "aria-label",
+              "message": "aria-label attribute does not exist or is empty"
+            },
+            {
+              "kind": "any",
+              "id": "aria-labelledby",
+              "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
+            },
+            {
+              "kind": "any",
+              "id": "non-empty-title",
+              "message": "Element has no title attribute",
+              "data": {
+                "messageKey": "noAttr"
+              }
+            },
+            {
+              "kind": "none",
+              "id": "focusable-no-name",
+              "message": "Element is in tab order and does not have accessible text"
+            }
+          ],
+          "evidence": {
+            "tag": "a",
+            "attrs": {
+              "href": "/privacy"
+            },
+            "text": "",
+            "visible": false,
+            "box": {
+              "x": 224,
+              "y": 1042,
+              "w": 0,
+              "h": 16
+            },
+            "style": {
+              "color": "rgb(0, 0, 238)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "16px",
+              "fontWeight": "400"
+            },
+            "focusable": true
+          },
+          "has_screenshot": false,
+          "fingerprint": {
+            "selector_key": "6a1d348815f31289",
+            "html_key": "4e47581dfe2f433a"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tabindex",
+      "impact": "serious",
+      "help": "Elements should not have tabindex greater than zero",
+      "description": "Ensure tabindex attribute values are not greater than 0",
+      "help_url": "https://dequeuniversity.com/rules/axe/4.14/tabindex?application=axeAPI",
+      "tags": [
+        "cat.keyboard",
+        "best-practice"
+      ],
+      "wcag": {
+        "criteria": [],
+        "level": null,
+        "since": null,
+        "category": "best-practice"
+      },
+      "fix_hint": "Avoid tabindex values greater than 0; use DOM order for focus order.",
+      "node_count": 1,
+      "nodes": [
+        {
+          "selector": "div[role=\"buton\"]",
+          "target": [
+            "div[role=\"buton\"]"
+          ],
+          "html": "<div class=\"add\" role=\"buton\" tabindex=\"3\">Add</div>",
+          "impact": "serious",
+          "failure_summary": "Fix any of the following:\n  Element has a tabindex greater than 0",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "tabindex",
+              "message": "Element has a tabindex greater than 0"
+            }
+          ],
+          "evidence": {
+            "tag": "div",
+            "attrs": {
+              "role": "buton",
+              "tabindex": "3"
+            },
+            "text": "Add",
+            "visible": true,
+            "box": {
+              "x": 457,
+              "y": 677,
+              "w": 34,
+              "h": 34
+            },
+            "style": {
+              "color": "rgb(255, 255, 255)",
+              "background": "rgb(122, 74, 36)",
+              "fontSize": "13px",
+              "fontWeight": "400"
+            },
+            "focusable": true
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "72f7ccaadcea1093",
+            "html_key": "d56a6e72898024cc"
+          }
+        }
+      ]
+    },
+    {
+      "id": "heading-order",
+      "impact": "moderate",
+      "help": "Heading levels should only increase by one",
+      "description": "Ensure the order of headings is semantically correct",
+      "help_url": "https://dequeuniversity.com/rules/axe/4.14/heading-order?application=axeAPI",
+      "tags": [
+        "cat.semantics",
+        "best-practice"
+      ],
+      "wcag": {
+        "criteria": [],
+        "level": null,
+        "since": null,
+        "category": "best-practice"
+      },
+      "fix_hint": "Do not skip heading levels (h1 → h2 → h3). Restyle with CSS instead of picking a smaller tag.",
+      "node_count": 1,
+      "nodes": [
+        {
+          "selector": "#beans",
+          "target": [
+            "#beans"
+          ],
+          "html": "<h5 id=\"beans\">This week's beans</h5>",
+          "impact": "moderate",
+          "failure_summary": "Fix any of the following:\n  Heading order invalid",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "heading-order",
+              "message": "Heading order invalid"
+            }
+          ],
+          "evidence": {
+            "tag": "h5",
+            "attrs": {
+              "id": "beans"
+            },
+            "text": "This week's beans",
+            "visible": true,
+            "box": {
+              "x": 28,
+              "y": 479,
+              "w": 1224,
+              "h": 30
+            },
+            "style": {
+              "color": "rgb(43, 29, 18)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "26px",
+              "fontWeight": "700"
+            },
+            "focusable": false
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "2a69bfa410ddf5bc",
+            "html_key": "f0b679282bd763a7"
+          }
+        }
+      ]
+    },
+    {
+      "id": "landmark-one-main",
+      "impact": "moderate",
+      "help": "Document should have one main landmark",
+      "description": "Ensure the document has a main landmark",
+      "help_url": "https://dequeuniversity.com/rules/axe/4.14/landmark-one-main?application=axeAPI",
+      "tags": [
+        "cat.semantics",
+        "best-practice"
+      ],
+      "wcag": {
+        "criteria": [],
+        "level": null,
+        "since": null,
+        "category": "best-practice"
+      },
+      "fix_hint": "Wrap the primary content in a single <main> element.",
+      "node_count": 2,
+      "nodes": [
+        {
+          "selector": "html",
+          "target": [
+            "html"
+          ],
+          "html": "<html>",
+          "impact": "moderate",
+          "failure_summary": "Fix all of the following:\n  Document does not have a main landmark",
+          "checks": [
+            {
+              "kind": "all",
+              "id": "page-has-main",
+              "message": "Document does not have a main landmark"
+            }
+          ],
+          "evidence": {
+            "tag": "html",
+            "attrs": {},
+            "text": "Lumen Coffee Beans Subscribe Small-batch coffee, roasted on Tuesdays Single-origin beans from four farms we have visited",
+            "visible": true,
+            "box": {
+              "x": 0,
+              "y": 0,
+              "w": 1280,
+              "h": 1082
+            },
+            "style": {
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "16px",
+              "fontWeight": "400"
+            },
+            "focusable": false
+          },
+          "has_screenshot": false,
+          "fingerprint": {
+            "selector_key": "7b79eebf97439e2f",
+            "html_key": "c9626945e0789d84"
+          }
+        },
+        {
+          "selector": "iframe >> html",
+          "target": [
+            "iframe",
+            "html"
+          ],
+          "html": "<html><head><meta charset=\"utf-8\"><title>Roastery map</title></head>\n<body style=\"margin:0;font:14px sans-serif;background:#fff\">\n<div style=\"padding:12px\"><img src=\"pin.svg\" width=\"28\" height=\"28\"> Visit us: 14 Mill Lane</div>\n\n</body></html>",
+          "impact": "moderate",
+          "failure_summary": "Fix all of the following:\n  Document does not have a main landmark",
+          "checks": [
+            {
+              "kind": "all",
+              "id": "page-has-main",
+              "message": "Document does not have a main landmark"
+            }
+          ],
+          "evidence": null,
+          "has_screenshot": false,
+          "fingerprint": {
+            "selector_key": "dc210ef0c0242615",
+            "html_key": "9dc7a55b68186df9"
+          }
+        }
+      ]
+    },
+    {
+      "id": "meta-viewport",
+      "impact": "moderate",
+      "help": "Zooming and scaling must not be disabled",
+      "description": "Ensure <meta name=\"viewport\"> does not disable text scaling and zooming",
+      "help_url": "https://dequeuniversity.com/rules/axe/4.14/meta-viewport?application=axeAPI",
+      "tags": [
+        "cat.sensory-and-visual-cues",
+        "wcag2aa",
+        "wcag144",
+        "EN-301-549",
+        "EN-9.1.4.4",
+        "ACT",
+        "RGAAv4",
+        "RGAA-10.4.2"
+      ],
+      "wcag": {
+        "criteria": [
+          "1.4.4"
+        ],
+        "level": "AA",
+        "since": "2.0",
+        "category": "wcag"
+      },
+      "fix_hint": "Do not disable zoom: remove user-scalable=no / maximum-scale=1 from the viewport meta tag.",
+      "node_count": 1,
+      "nodes": [
+        {
+          "selector": "meta[name=\"viewport\"]",
+          "target": [
+            "meta[name=\"viewport\"]"
+          ],
+          "html": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1\">",
+          "impact": "moderate",
+          "failure_summary": "Fix any of the following:\n  user-scalable=no on <meta> tag disables zooming on mobile devices",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "meta-viewport",
+              "message": "user-scalable=no on <meta> tag disables zooming on mobile devices",
+              "data": "user-scalable=no"
+            }
+          ],
+          "evidence": {
+            "tag": "meta",
+            "attrs": {
+              "name": "viewport"
+            },
+            "text": "",
+            "visible": false,
+            "box": {
+              "x": 0,
+              "y": 0,
+              "w": 0,
+              "h": 0
+            },
+            "style": {
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "16px",
+              "fontWeight": "400"
+            },
+            "focusable": false
+          },
+          "has_screenshot": false,
+          "fingerprint": {
+            "selector_key": "58b89d631c47eabb",
+            "html_key": "e9637dacc73305aa"
+          }
+        }
+      ]
+    },
+    {
+      "id": "page-has-heading-one",
+      "impact": "moderate",
+      "help": "Page should contain a level-one heading",
+      "description": "Ensure that the page, or at least one of its frames contains a level-one heading",
+      "help_url": "https://dequeuniversity.com/rules/axe/4.14/page-has-heading-one?application=axeAPI",
+      "tags": [
+        "cat.semantics",
+        "best-practice"
+      ],
+      "wcag": {
+        "criteria": [],
+        "level": null,
+        "since": null,
+        "category": "best-practice"
+      },
+      "fix_hint": "Add one <h1> that names the page.",
+      "node_count": 2,
+      "nodes": [
+        {
+          "selector": "html",
+          "target": [
+            "html"
+          ],
+          "html": "<html>",
+          "impact": "moderate",
+          "failure_summary": "Fix all of the following:\n  Page must have a level-one heading",
+          "checks": [
+            {
+              "kind": "all",
+              "id": "page-has-heading-one",
+              "message": "Page must have a level-one heading"
+            }
+          ],
+          "evidence": {
+            "tag": "html",
+            "attrs": {},
+            "text": "Lumen Coffee Beans Subscribe Small-batch coffee, roasted on Tuesdays Single-origin beans from four farms we have visited",
+            "visible": true,
+            "box": {
+              "x": 0,
+              "y": 0,
+              "w": 1280,
+              "h": 1082
+            },
+            "style": {
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "16px",
+              "fontWeight": "400"
+            },
+            "focusable": false
+          },
+          "has_screenshot": false,
+          "fingerprint": {
+            "selector_key": "7e4998516c839de2",
+            "html_key": "328afbc6d03ee72b"
+          }
+        },
+        {
+          "selector": "iframe >> html",
+          "target": [
+            "iframe",
+            "html"
+          ],
+          "html": "<html><head><meta charset=\"utf-8\"><title>Roastery map</title></head>\n<body style=\"margin:0;font:14px sans-serif;background:#fff\">\n<div style=\"padding:12px\"><img src=\"pin.svg\" width=\"28\" height=\"28\"> Visit us: 14 Mill Lane</div>\n\n</body></html>",
+          "impact": "moderate",
+          "failure_summary": "Fix all of the following:\n  Page must have a level-one heading",
+          "checks": [
+            {
+              "kind": "all",
+              "id": "page-has-heading-one",
+              "message": "Page must have a level-one heading"
+            }
+          ],
+          "evidence": null,
+          "has_screenshot": false,
+          "fingerprint": {
+            "selector_key": "71c42477b407bc96",
+            "html_key": "40560e7a164d0fcd"
+          }
+        }
+      ]
+    },
+    {
+      "id": "region",
+      "impact": "moderate",
+      "help": "All page content should be contained by landmarks",
+      "description": "Ensure all page content is contained by landmarks",
+      "help_url": "https://dequeuniversity.com/rules/axe/4.14/region?application=axeAPI",
+      "tags": [
+        "cat.keyboard",
+        "best-practice",
+        "RGAAv4",
+        "RGAA-9.2.1"
+      ],
+      "wcag": {
+        "criteria": [],
+        "level": null,
+        "since": null,
+        "category": "best-practice"
+      },
+      "fix_hint": "Place all visible content inside landmarks (<header>, <nav>, <main>, <footer>).",
+      "node_count": 13,
+      "nodes": [
+        {
+          "selector": ".logo",
+          "target": [
+            ".logo"
+          ],
+          "html": "<div class=\"logo\">Lumen Coffee</div>",
+          "impact": "moderate",
+          "failure_summary": "Fix any of the following:\n  Some page content is not contained by landmarks",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "region",
+              "message": "Some page content is not contained by landmarks",
+              "data": {
+                "isIframe": false
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "div",
+            "attrs": {},
+            "text": "Lumen Coffee",
+            "visible": true,
+            "box": {
+              "x": 28,
+              "y": 16,
+              "w": 128,
+              "h": 23
+            },
+            "style": {
+              "color": "rgb(74, 47, 27)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "20px",
+              "fontWeight": "700"
+            },
+            "focusable": false
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "c925a47f440b2ebc",
+            "html_key": "939fb372054f0d69"
+          }
+        },
+        {
+          "selector": ".hero",
+          "target": [
+            ".hero"
+          ],
+          "html": "<div class=\"hero\">\n  <h3>Small-batch coffee, roasted on Tuesdays</h3>\n  <p class=\"lede\">Single-origin beans from four farms we have visited in person.</p>\n  <img src=\"hero.svg\" width=\"520\" height=\"220\">\n  <div class=\"faint\">Free shipping on orders over $40 · ships within 48 hours</div>\n</div>",
+          "impact": "moderate",
+          "failure_summary": "Fix any of the following:\n  Some page content is not contained by landmarks",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "region",
+              "message": "Some page content is not contained by landmarks",
+              "data": {
+                "isIframe": false
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "div",
+            "attrs": {},
+            "text": "Small-batch coffee, roasted on Tuesdays Single-origin beans from four farms we have visited in person. Free shipping on ",
+            "visible": true,
+            "box": {
+              "x": 0,
+              "y": 55,
+              "w": 720,
+              "h": 396
+            },
+            "style": {
+              "color": "rgb(43, 29, 18)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "16px",
+              "fontWeight": "400"
+            },
+            "focusable": false
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "8a490346d5f7d644",
+            "html_key": "738944459e9c4ea0"
+          }
+        },
+        {
+          "selector": "#beans",
+          "target": [
+            "#beans"
+          ],
+          "html": "<h5 id=\"beans\">This week's beans</h5>",
+          "impact": "moderate",
+          "failure_summary": "Fix any of the following:\n  Some page content is not contained by landmarks",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "region",
+              "message": "Some page content is not contained by landmarks",
+              "data": {
+                "isIframe": false
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "h5",
+            "attrs": {
+              "id": "beans"
+            },
+            "text": "This week's beans",
+            "visible": true,
+            "box": {
+              "x": 28,
+              "y": 479,
+              "w": 1224,
+              "h": 30
+            },
+            "style": {
+              "color": "rgb(43, 29, 18)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "26px",
+              "fontWeight": "700"
+            },
+            "focusable": false
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "7804c71cc807f442",
+            "html_key": "5d0a43598dfc916b"
+          }
+        },
+        {
+          "selector": "img[src$=\"bean-a.svg\"]",
+          "target": [
+            "img[src$=\"bean-a.svg\"]"
+          ],
+          "html": "<img src=\"bean-a.svg\" width=\"96\" height=\"96\">",
+          "impact": "moderate",
+          "failure_summary": "Fix any of the following:\n  Some page content is not contained by landmarks",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "region",
+              "message": "Some page content is not contained by landmarks",
+              "data": {
+                "isIframe": false
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "img",
+            "attrs": {},
+            "text": "",
+            "visible": true,
+            "box": {
+              "x": 45,
+              "y": 534,
+              "w": 96,
+              "h": 96
+            },
+            "style": {
+              "color": "rgb(43, 29, 18)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "16px",
+              "fontWeight": "400"
+            },
+            "focusable": false
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "f547692d5889b111",
+            "html_key": "bde6b5e01a3c013a"
+          }
+        },
+        {
+          "selector": ".card:nth-child(1) > h2",
+          "target": [
+            ".card:nth-child(1) > h2"
+          ],
+          "html": "<h2>Huila Reserve</h2>",
+          "impact": "moderate",
+          "failure_summary": "Fix any of the following:\n  Some page content is not contained by landmarks",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "region",
+              "message": "Some page content is not contained by landmarks",
+              "data": {
+                "isIframe": false
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "h2",
+            "attrs": {},
+            "text": "Huila Reserve",
+            "visible": true,
+            "box": {
+              "x": 45,
+              "y": 644,
+              "w": 196,
+              "h": 21
+            },
+            "style": {
+              "color": "rgb(43, 29, 18)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "18px",
+              "fontWeight": "700"
+            },
+            "focusable": false
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "f9f4997d42afc33d",
+            "html_key": "79dbe8221d61de66"
+          }
+        },
+        {
+          "selector": ".card:nth-child(1) > p",
+          "target": [
+            ".card:nth-child(1) > p"
+          ],
+          "html": "<p class=\"faint\">Caramel, red apple, cocoa nib</p>",
+          "impact": "moderate",
+          "failure_summary": "Fix any of the following:\n  Some page content is not contained by landmarks",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "region",
+              "message": "Some page content is not contained by landmarks",
+              "data": {
+                "isIframe": false
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "p",
+            "attrs": {},
+            "text": "Caramel, red apple, cocoa nib",
+            "visible": true,
+            "box": {
+              "x": 45,
+              "y": 679,
+              "w": 196,
+              "h": 16
+            },
+            "style": {
+              "color": "rgb(185, 174, 163)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "14px",
+              "fontWeight": "400"
+            },
+            "focusable": false
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "b8174bcb6cd4b477",
+            "html_key": "96cfcf9e54f9dc0a"
+          }
+        },
+        {
+          "selector": ".card:nth-child(2)",
+          "target": [
+            ".card:nth-child(2)"
+          ],
+          "html": "<div class=\"card\" id=\"card\">\n    <img src=\"bean-b.svg\" width=\"96\" height=\"96\" alt=\"\">\n    <h2>Sidamo Natural</h2>\n    <p class=\"faint\">Blueberry jam, jasmine</p>\n    <div class=\"add\" role=\"buton\" tabindex=\"3\">Add</div>\n  </div>",
+          "impact": "moderate",
+          "failure_summary": "Fix any of the following:\n  Some page content is not contained by landmarks",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "region",
+              "message": "Some page content is not contained by landmarks",
+              "data": {
+                "isIframe": false
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "div",
+            "attrs": {
+              "id": "card"
+            },
+            "text": "Sidamo Natural Blueberry jam, jasmine Add",
+            "visible": true,
+            "box": {
+              "x": 276,
+              "y": 517,
+              "w": 230,
+              "h": 209
+            },
+            "style": {
+              "color": "rgb(43, 29, 18)",
+              "background": "rgb(255, 255, 255)",
+              "fontSize": "16px",
+              "fontWeight": "400"
+            },
+            "focusable": false
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "7abebe5cf1e93b6a",
+            "html_key": "7280c3dd4635db89"
+          }
+        },
+        {
+          "selector": "#subscribe",
+          "target": [
+            "#subscribe"
+          ],
+          "html": "<h2 id=\"subscribe\">Get the roast calendar</h2>",
+          "impact": "moderate",
+          "failure_summary": "Fix any of the following:\n  Some page content is not contained by landmarks",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "region",
+              "message": "Some page content is not contained by landmarks",
+              "data": {
+                "isIframe": false
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "h2",
+            "attrs": {
+              "id": "subscribe"
+            },
+            "text": "Get the roast calendar",
+            "visible": true,
+            "box": {
+              "x": 28,
+              "y": 754,
+              "w": 1224,
+              "h": 27
+            },
+            "style": {
+              "color": "rgb(43, 29, 18)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "24px",
+              "fontWeight": "700"
+            },
+            "focusable": false
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "317a8383cdd381c4",
+            "html_key": "be253345a5d7b6e1"
+          }
+        },
+        {
+          "selector": "input[type=\"text\"]",
+          "target": [
+            "input[type=\"text\"]"
+          ],
+          "html": "<input type=\"text\" name=\"name\" placeholder=\"Your name\">",
+          "impact": "moderate",
+          "failure_summary": "Fix any of the following:\n  Some page content is not contained by landmarks",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "region",
+              "message": "Some page content is not contained by landmarks",
+              "data": {
+                "isIframe": false
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "input",
+            "attrs": {
+              "type": "text",
+              "name": "name"
+            },
+            "text": "",
+            "visible": true,
+            "box": {
+              "x": 28,
+              "y": 791,
+              "w": 221,
+              "h": 39
+            },
+            "style": {
+              "color": "rgb(0, 0, 0)",
+              "background": "rgb(255, 255, 255)",
+              "fontSize": "15px",
+              "fontWeight": "400"
+            },
+            "focusable": true
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "ddd4051198959e60",
+            "html_key": "2867260e28c7999e"
+          }
+        },
+        {
+          "selector": "input[type=\"email\"]",
+          "target": [
+            "input[type=\"email\"]"
+          ],
+          "html": "<input type=\"email\" name=\"email\" placeholder=\"Email address\">",
+          "impact": "moderate",
+          "failure_summary": "Fix any of the following:\n  Some page content is not contained by landmarks",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "region",
+              "message": "Some page content is not contained by landmarks",
+              "data": {
+                "isIframe": false
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "input",
+            "attrs": {
+              "type": "email",
+              "name": "email"
+            },
+            "text": "",
+            "visible": true,
+            "box": {
+              "x": 259,
+              "y": 791,
+              "w": 221,
+              "h": 39
+            },
+            "style": {
+              "color": "rgb(0, 0, 0)",
+              "background": "rgb(255, 255, 255)",
+              "fontSize": "15px",
+              "fontWeight": "400"
+            },
+            "focusable": true
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "119955a97f426d5b",
+            "html_key": "30342cb149d5acf4"
+          }
+        },
+        {
+          "selector": "select",
+          "target": [
+            "select"
+          ],
+          "html": "<select name=\"freq\">\n    <option>Weekly</option>\n    <option>Monthly</option>\n  </select>",
+          "impact": "moderate",
+          "failure_summary": "Fix any of the following:\n  Some page content is not contained by landmarks",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "region",
+              "message": "Some page content is not contained by landmarks",
+              "data": {
+                "isIframe": false
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "select",
+            "attrs": {
+              "name": "freq"
+            },
+            "text": "Weekly Monthly",
+            "visible": true,
+            "box": {
+              "x": 490,
+              "y": 791,
+              "w": 94,
+              "h": 39
+            },
+            "style": {
+              "color": "rgb(0, 0, 0)",
+              "background": "rgb(239, 239, 239)",
+              "fontSize": "15px",
+              "fontWeight": "400"
+            },
+            "focusable": true
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "cb728870f7c4be8b",
+            "html_key": "04ba0fb1d63e6145"
+          }
+        },
+        {
+          "selector": "iframe >> div",
+          "target": [
+            "iframe",
+            "div"
+          ],
+          "html": "<div style=\"padding:12px\"><img src=\"pin.svg\" width=\"28\" height=\"28\"> Visit us: 14 Mill Lane</div>",
+          "impact": "moderate",
+          "failure_summary": "Fix any of the following:\n  Some page content is not contained by landmarks",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "region",
+              "message": "Some page content is not contained by landmarks",
+              "data": {
+                "isIframe": false
+              }
+            }
+          ],
+          "evidence": null,
+          "has_screenshot": false,
+          "fingerprint": {
+            "selector_key": "1aa87b454882123f",
+            "html_key": "f5f713706316483e"
+          }
+        },
+        {
+          "selector": ".footer",
+          "target": [
+            ".footer"
+          ],
+          "html": "<div class=\"footer\">\n  <span class=\"faint\">© 2026 Lumen Coffee Roasters</span>\n  <a href=\"/privacy\"></a>\n</div>",
+          "impact": "moderate",
+          "failure_summary": "Fix any of the following:\n  Some page content is not contained by landmarks",
+          "checks": [
+            {
+              "kind": "any",
+              "id": "region",
+              "message": "Some page content is not contained by landmarks",
+              "data": {
+                "isIframe": false
+              }
+            }
+          ],
+          "evidence": {
+            "tag": "div",
+            "attrs": {},
+            "text": "© 2026 Lumen Coffee Roasters",
+            "visible": true,
+            "box": {
+              "x": 0,
+              "y": 1018,
+              "w": 1280,
+              "h": 64
+            },
+            "style": {
+              "color": "rgb(43, 29, 18)",
+              "background": "rgba(0, 0, 0, 0)",
+              "fontSize": "16px",
+              "fontWeight": "400"
+            },
+            "focusable": false
+          },
+          "has_screenshot": true,
+          "fingerprint": {
+            "selector_key": "23a26f6408b33a35",
+            "html_key": "888db51574f6b807"
+          }
+        }
+      ]
+    }
+  ],
+  "review": [],
+  "passes": [
+    {
+      "id": "aria-deprecated-role",
+      "help": "Deprecated ARIA roles must not be used",
+      "nodes": 1
+    },
+    {
+      "id": "aria-hidden-body",
+      "help": "aria-hidden=\"true\" must not be present on the document body",
+      "nodes": 1
+    },
+    {
+      "id": "aria-required-attr",
+      "help": "Required ARIA attributes must be provided",
+      "nodes": 1
+    },
+    {
+      "id": "avoid-inline-spacing",
+      "help": "Inline text spacing must be adjustable with custom stylesheets",
+      "nodes": 2
+    },
+    {
+      "id": "button-name",
+      "help": "Buttons must have discernible text",
+      "nodes": 1
+    },
+    {
+      "id": "bypass",
+      "help": "Page must have means to bypass repeated blocks",
+      "nodes": 1
+    },
+    {
+      "id": "color-contrast",
+      "help": "Elements must meet minimum color contrast ratio thresholds",
+      "nodes": 11
+    },
+    {
+      "id": "empty-heading",
+      "help": "Headings should not be empty",
+      "nodes": 5
+    },
+    {
+      "id": "form-field-multiple-labels",
+      "help": "Form field must not have multiple label elements",
+      "nodes": 3
+    },
+    {
+      "id": "frame-tested",
+      "help": "Frames should be tested with axe-core",
+      "nodes": 1
+    },
+    {
+      "id": "heading-order",
+      "help": "Heading levels should only increase by one",
+      "nodes": 4
+    },
+    {
+      "id": "image-alt",
+      "help": "Images must have alternative text",
+      "nodes": 1
+    },
+    {
+      "id": "image-redundant-alt",
+      "help": "Alternative text of images should not be repeated as text",
+      "nodes": 4
+    },
+    {
+      "id": "label-title-only",
+      "help": "Form elements should have a visible label",
+      "nodes": 3
+    },
+    {
+      "id": "label",
+      "help": "Form elements must have labels",
+      "nodes": 2
+    },
+    {
+      "id": "link-name",
+      "help": "Links must have discernible text",
+      "nodes": 2
+    },
+    {
+      "id": "meta-viewport-large",
+      "help": "Users should be able to zoom and scale the text up to 500%",
+      "nodes": 1
+    },
+    {
+      "id": "nested-interactive",
+      "help": "Interactive controls must not be nested",
+      "nodes": 7
+    },
+    {
+      "id": "presentation-role-conflict",
+      "help": "Elements marked as presentational should be consistently ignored",
+      "nodes": 1
+    },
+    {
+      "id": "region",
+      "help": "All page content should be contained by landmarks",
+      "nodes": 28
+    },
+    {
+      "id": "target-size",
+      "help": "All touch targets must be 24px large, or leave sufficient space",
+      "nodes": 9
+    }
+  ],
+  "summary": {
+    "rules_violated": 15,
+    "instances": 39,
+    "by_impact_rules": {
+      "critical": 4,
+      "serious": 6,
+      "moderate": 5,
+      "minor": 0
+    },
+    "by_impact_instances": {
+      "critical": 6,
+      "serious": 14,
+      "moderate": 19,
+      "minor": 0
+    },
+    "needs_review_rules": 0,
+    "needs_review_instances": 0,
+    "rules_passed": 21,
+    "rules_inapplicable": 61
+  },
+  "coverage": {
+    "frames_total": 2,
+    "frames_skipped": 0
+  },
+  "blocked_requests": [],
+  "console_errors": [],
+  "notes": [],
+  "incomplete_reasons": [],
+  "disclaimer": "Automated testing (axe-core) can only detect a portion of WCAG issues. A scan with no violations is NOT a conformance claim or certification; keyboard, screen-reader, zoom/reflow and content-quality checks still need a human. Items under 'needs human review' were NOT decided by the engine.",
+  "duration_ms": 4680,
+  "note": "baseline"
+}

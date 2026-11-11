@@ -1,0 +1,43 @@
+name: a11y-lens
+version: 0.1.0
+description: >-
+  Autonomous website accessibility testing and repair verification. Opens a page in a real headless
+  Chromium, runs the axe-core engine against the rendered DOM, stores evidence-backed scans, and compares
+  before/after scans so Hermes can prove its fixes in the rendered page. Deterministic engine findings only;
+  never claims WCAG conformance.
+author: "A11Y Lens contributors"
+license: MIT
+homepage: https://github.com/Johnlocke0347/a11y-lens
+requires_hermes: ">=0.23.0"
+tags: [accessibility, wcag, testing, browser, axe-core, a11y]
+provides_tools:
+  - a11y_scan
+  - a11y_report
+  - a11y_compare
+python_dependencies:
+  - "playwright>=1.48,<2"
+config_schema:
+  allowed_origins:
+    type: list
+    default: []
+    description: "Remote origins you own that may be scanned (default: loopback only). Managed with `hermes a11y allow <origin>`."
+  browser_executable:
+    type: str
+    default: ""
+    description: "Optional path to a Chromium/Chrome binary. Empty = Playwright's Chromium, then system Chrome/Edge."
+  browser_channel:
+    type: str
+    default: ""
+    description: "Optional Playwright channel (chrome, msedge) instead of the managed Chromium."
+  chromium_args:
+    type: list
+    default: []
+    description: "Extra Chromium launch flags (advanced; e.g. for containers)."
+  default_timeout_s:
+    type: int
+    default: 45
+    description: "Default page-load budget per scan in seconds (max 120)."
+  keep_scans:
+    type: int
+    default: 100
+    description: "How many scans to keep in history before pruning the oldest."
