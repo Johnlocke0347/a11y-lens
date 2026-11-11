@@ -1,0 +1,120 @@
+1
+00:00:01,750 --> 00:00:05,933
+AI coding agents say they fixed your accessibility bugs.
+
+2
+00:00:05,583 --> 00:00:07,316
+But how do you know?
+
+3
+00:00:08,066 --> 00:00:11,320
+A11Y Lens is a plugin for Hermes.
+
+4
+00:00:12,070 --> 00:00:15,418
+It opens the page in a real headless Chromium.
+
+5
+00:00:15,068 --> 00:00:18,856
+And runs the axe-core engine against the rendered DOM.
+
+6
+00:00:18,506 --> 00:00:20,750
+Thirty-nine violations.
+
+7
+00:00:20,400 --> 00:00:21,994
+Not guessed.
+
+8
+00:00:21,644 --> 00:00:22,936
+Measured.
+
+9
+00:00:22,586 --> 00:00:28,429
+Every finding carries a CSS selector, the HTML, and the reason it fails.
+
+10
+00:00:29,179 --> 00:00:33,861
+Every number in this report is axe-core output from an actual browser run.
+
+11
+00:00:33,511 --> 00:00:37,102
+An empty button. Images with no alt text.
+
+12
+00:00:36,752 --> 00:00:40,947
+Contrast eight times too low. A select with no label.
+
+13
+00:00:41,697 --> 00:00:44,951
+A11Y Lens never edits your code.
+
+14
+00:00:44,601 --> 00:00:48,622
+The agent repairs the source with its normal file tools.
+
+15
+00:00:49,372 --> 00:00:53,427
+Adding labels, alt text, lang, a title.
+
+16
+00:00:53,077 --> 00:00:55,147
+Fixing the role typo.
+
+17
+00:00:54,797 --> 00:00:57,273
+Real contrast values.
+
+18
+00:00:56,923 --> 00:00:59,272
+Computed on real colors.
+
+19
+00:01:00,022 --> 00:01:02,428
+Now, the part that matters.
+
+20
+00:01:02,078 --> 00:01:04,938
+Re-open the page. Re-test.
+
+21
+00:01:05,688 --> 00:01:07,038
+Compare.
+
+22
+00:01:06,688 --> 00:01:10,291
+Resolved. Remaining. And newly introduced.
+
+23
+00:01:11,041 --> 00:01:13,923
+Regressions the agent cannot hide.
+
+24
+00:01:13,573 --> 00:01:15,283
+Not "trust me".
+
+25
+00:01:16,033 --> 00:01:18,057
+The rendered page.
+
+26
+00:01:17,707 --> 00:01:19,220
+Re-tested.
+
+27
+00:01:18,870 --> 00:01:21,892
+It never claims WCAG compliance.
+
+28
+00:01:21,542 --> 00:01:24,912
+A clean scan is where human testing begins.
+
+29
+00:01:25,662 --> 00:01:27,790
+A11Y Lens.
+
+30
+00:01:27,440 --> 00:01:30,427
+Don't just trust the fix. Verify it.
+
