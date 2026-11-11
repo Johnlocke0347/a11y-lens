@@ -1,0 +1,60 @@
+1
+00:00:01,500 --> 00:00:08,500
+AI coding agents say they fixed your accessibility bugs. But how do you know?
+
+2
+00:00:10,000 --> 00:00:18,500
+A11Y Lens is a plugin for Hermes. It opens the page in a real headless Chromium, and runs the axe-core engine against the rendered DOM.
+
+3
+00:00:18,500 --> 00:00:26,500
+Thirty-nine violations. Not guessed — measured. Every finding carries a CSS selector, the HTML, and the reason it fails.
+
+4
+00:00:26,500 --> 00:00:31,800
+Every number in this report is axe-core output from an actual browser run.
+
+5
+00:00:31,800 --> 00:00:34,300
+An empty button. Images with no alt text.
+
+6
+00:00:34,300 --> 00:00:37,800
+Contrast eight times too low. A select with no label.
+
+7
+00:00:38,000 --> 00:00:44,600
+A11Y Lens never edits your code. The agent repairs the source with its normal file tools.
+
+8
+00:00:46,000 --> 00:00:51,400
+Adding labels, alt text, lang, a title. Fixing the role typo.
+
+9
+00:00:51,400 --> 00:00:55,400
+Real contrast values, computed on real colors.
+
+10
+00:00:58,000 --> 00:01:02,000
+The same page, after the repair.
+
+11
+00:01:02,000 --> 00:01:06,500
+Now the part that matters. Re-open the page. Re-test.
+
+12
+00:01:10,500 --> 00:01:20,400
+Compare. Resolved. Remaining. And newly introduced — regressions the agent cannot hide. Not “trust me”: the rendered page, re-tested.
+
+13
+00:01:22,500 --> 00:01:25,100
+It never claims WCAG compliance.
+
+14
+00:01:25,100 --> 00:01:28,500
+A clean scan is where human testing begins.
+
+15
+00:01:32,500 --> 00:01:37,500
+A11Y Lens. Don't just trust the fix. Verify it.
+
